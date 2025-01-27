@@ -1,0 +1,74 @@
+{% trans_default_domain 'admin.materials.category' %}
+	{# ТОРГОВЫЕ ПРЕДЛОЖЕНИЯ #}
+
+
+<div class="d-flex gap-2">
+
+    <div class="d-flex flex-column gap-2 w-50">
+
+        <div class="card w-100 border-light">
+
+            <div class="card-header border-light bg-body">
+
+                <div class="card-title ">
+                    <label class='h5 d-flex align-items-center'>
+                        {{ form_widget(form.offer.offer) }}
+                        <span>{{ 'Товары в категори с торговым предложением'|trans }}</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id='{{ form.offer.offer.vars.id }}_settings' class="card-body text-start pb-0 d-none">
+
+                {# Настройки торгового предложения #}
+                {{ include(_self|replace({ "form.offers.html.twig": "offer/_offer.html.twig" })) }}
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="d-flex flex-column gap-2 w-50 ">
+        <div class="card w-100 border-light">
+
+            <div class="card-header border-light bg-body">
+
+                <div class="card-title">
+                    <label class='h5 d-flex align-items-center'>
+                        {{ form_widget(form.offer.variation.variation) }}
+                        <span>{{ 'Множественные Варианты торгового предложения'|trans }}</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id='{{ form.offer.variation.variation.vars.id }}_settings' class="card-body text-start pb-0 d-none">
+                {# Настройки локали  #}
+                {{ include(_self|replace({ "form.offers.html.twig": "variation/_variation.html.twig" })) }}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="d-flex flex-column gap-2 w-50 ">
+        <div class="card w-100 border-light">
+
+            <div class="card-header border-light bg-body">
+                <div class="card-title">
+                    <label class='h5 d-flex align-items-center'>
+                        {{ form_widget(form.offer.variation.modification.modification) }}
+                        <span>{{ 'Модификации множественных вариантов'|trans }}</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id='{{ form.offer.variation.modification.modification.vars.id }}_settings'
+                 class="card-body text-start pb-0 d-none">
+                {# Настройки локали  #}
+                {{ include(_self|replace({ "form.offers.html.twig": "modification/_modification.html.twig" })) }}
+            </div>
+        </div>
+    </div>
+
+
+</div>

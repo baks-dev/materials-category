@@ -1,0 +1,51 @@
+{% trans_default_domain 'admin.materials.category' %}
+
+
+{% set identifier = trans_prototype.vars.id %}
+
+{% set prototype_local = form_row(trans_prototype.local, { value: '__LOCALE__' }) %}
+{% set prototype_name = form_row(trans_prototype.name, { label: 'admin.form.label.field.trans.name'|trans }) %}
+{% set prototype_description = form_row(trans_prototype.description, { label: 'admin.form.label.field.trans.desc'|trans }) %}
+
+{% if form.translate.count > 1 %}
+
+    <ul class="nav nav-pills gap-3 mb-3" id="nav-{{ identifier }}" role="tablist">
+        {% for translate in form.translate %}
+
+            <li class="nav-item" role="presentation">
+                <button class="btn fw-bolder nav-link{{ app.request.locale == translate.vars.value.local? ' active' : '' }}"
+                        data-bs-toggle="tab"
+                        type="button"
+                        role="tab"
+                        aria-selected="true"
+
+                        id="nav-{{ identifier }}-{{ translate.vars.value.local }}-tab"
+                        data-bs-target="#nav-{{ identifier }}-{{ translate.vars.value.local }}"
+                        aria-controls="nav-{{ identifier }}-{{ translate.vars.value.local }}"
+                >
+                    <small class="text-uppercase px-3">{{ translate.vars.value.local|trans({}, 'core') }}</small>
+                </button>
+            </li>
+
+        {% endfor %}
+    </ul>
+
+{% endif %}
+
+
+<div class="tab-content " id="nav-{{ identifier }}-content">
+
+    {% for translate in form.translate %}
+        <div class="tab-pane fade{{ app.request.locale == translate.vars.value.local? ' show active' : '' }}"
+             id="nav-{{ identifier }}-{{ translate.vars.value.local }}" role="tabpanel"
+             aria-labelledby="nav-{{ identifier }}-{{ translate.vars.value.local }}-tab">
+
+            {{ prototype_local|replace({"__field_translate__" : loop.index0, "__LOCALE__" : translate.vars.value.local }) | raw }}
+
+            {{ prototype_name | replace({ "__field_translate__" : loop.index0 }) | raw }}
+
+            {{ prototype_description | replace({ "__field_translate__" : loop.index0 }) | raw }}
+
+        </div>
+    {% endfor %}
+</div>

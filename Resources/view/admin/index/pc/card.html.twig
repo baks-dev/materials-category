@@ -1,0 +1,54 @@
+{% trans_default_domain('admin.materials.category') %}
+
+<tr class="vertical-middle">
+
+
+    <td class="text-nowrap">
+        {# Пользовательское меню #}
+        {{ include(_self|replace({ "card.html.twig": "_usecase.html.twig" })) }}
+    </td>
+
+    <td class="text-center">
+        {{ item.category_sort }}
+    </td>
+
+    <td class="w-100">
+
+        <div class='w-100 d-flex gap-5'>
+
+            {# <a href="{{ path('materials-category:admin.index', { cat: item.id }) }}"
+			   class="text-{{ item.category_child_count ? 'light' : 'primary' }} btn btn-light fw-bolder mb-1"
+			>
+				{{ item.category_child_count }}
+			</a> #}
+
+
+
+
+            {% if item.category_child_count %}
+                <a href="{{ path('materials-category:admin.index', { cat: item.id }) }}"
+                   class="text-decoration-none"
+                >{{ item.category_name }}</a> &nbsp; {{ item.category_child_count }}
+            {% else %}
+                <span class='text-muted fw-bold'>{{ item.category_name }}</span>
+            {% endif %}
+
+            {# {% if is_granted(ROLE~'_EDIT') or is_granted('ROLE_ADMIN') %}
+            #}{# Название #}{#
+            <a href="{{ path('materials-category:admin.newedit.edit', {id: item.event }) }}"
+               class="text-decoration-none"
+            >{{ item.category_name }}</a>
+        {% else %}
+            {{ item.category_name }}
+        {% endif %} #}
+
+            {# Описание #}
+            <div class="text-muted small">
+                {{ string_width(item.category_description, 150)|raw }}
+            </div>
+
+
+        </div>
+    </td>
+
+</tr>

@@ -1,0 +1,48 @@
+{% trans_default_domain 'admin.materials.category' %}
+
+{{ form_row(form.offer.variation.modification.postfix, {
+    label : 'Модификации с постфиксом'|trans,
+    attr : { class : 'change-postfix' }
+} ) }}
+
+{# Настройки локали  #}
+{{ include(_self|replace({ "_modification.html.twig": "_modification.trans.html.twig" })) }}
+
+{{ form_row(form.offer.variation.modification.image, {  label : 'Возможность загрузки пользовательского изображение'|trans } ) }}
+
+
+{{ form_row(form.offer.variation.modification.article, {  label : 'Модификации с Артикулом'|trans } ) }}
+
+{{ form_row(form.offer.variation.modification.price, {  label : 'Модификации с ценой'|trans } ) }}
+
+{{ form_row(form.offer.variation.modification.quantitative, {  label : 'Количественный учет модицикаций'|trans } ) }}
+
+		{# {{ form_row(form.offer.isReference, {  label : 'Справочник'|trans, attr : { 'data-reference' : offer.reference.vars.id, 'data-multiple' : offer.multiple.vars.id, 'class' : 'is-reference' } } ) }} #}
+		
+
+	{# <div class="d-none py-4" id="multiple_{{ offer.multiple.vars.id }}">
+		{{ form_row(form.offer.multiple, {  label : 'Множественный'|trans } ) }}
+	</div> #}
+
+<div class="d-flex gap-5 align-items-center mt-3">
+
+    {{ form_row(form.offer.variation.modification.isReference, {  label : 'Справочник'|trans, attr : { 'data-reference' : form.offer.variation.modification.reference.vars.id,  'class' : 'is-reference' } }) }}
+
+
+
+    {{ form_row(form.offer.variation.modification.reference, {  label : false, placeholder: 'Выберите справичник из списка...'|trans , attr : { 'class' : 'd-none' } } ) }}
+</div>
+
+
+<div class="text-muted text-break small p-3">
+    Справочник даст пользователю выбор значений согласно шаблону, иначе текстовое поле для заполнения
+</div>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,43 @@
+{% trans_default_domain 'admin.materials.category' %}
+
+
+{{ form_row(form.offer.postfix, {
+    label : 'Торговое предложение с постфиксом'|trans,
+    attr : { class : 'change-postfix' } } ) }}
+
+{# Настройки локали торгового предложения #}
+
+{{ include(_self|replace({ "_offer.html.twig": "_offer.trans.html.twig" })) }}
+
+
+
+
+{{ form_row(form.offer.image, {  label : 'Возможность загрузки пользовательского изображение'|trans } ) }}
+
+{{ form_row(form.offer.article, {  label : 'Торговое предложение с Артикулом'|trans } ) }}
+
+{{ form_row(form.offer.price, {  label : 'Торговое предложение с ценой'|trans } ) }}
+
+{{ form_row(form.offer.quantitative, {  label : 'Количественный учет ТП'|trans } ) }}
+
+
+<div class="d-flex gap-5 align-items-center mt-3">
+
+    {{ form_row(form.offer.isReference, {  label : 'Справочник'|trans, attr : { 'data-reference' : form.offer.reference.vars.id,  'class' : 'is-reference' } }) }}
+
+    {{ form_row(form.offer.reference, {  label : false,
+        placeholder: 'Выберите справичник из списка...'|trans , attr : { 'class' : 'd-none' } } ) }}
+</div>
+
+<div class="text-muted text-break small p-3">
+    Справочник даст пользователю выбор значений согласно шаблону, иначе текстовое поле для заполнения
+</div>
+
+
+
+
+
+
+
+
+

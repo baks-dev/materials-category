@@ -1,0 +1,35 @@
+{% trans_default_domain 'admin.materials.category' %}
+
+{# СВОЙСТВА ПРОДУКТА #}
+
+<div class="d-flex flex-column w-100 pb-3">
+    <div id="section_collection">
+        {% for section in form.section %}
+            {# Секции свойств продукта #}
+            {{ include(_self|replace({ "form.properties.html.twig": "section/_section.html.twig"})) }}
+        {% endfor %}
+    </div>
+</div>
+
+<div class="position-sticky z-index-3 w-50" style="bottom: 3rem;">
+    <button type="button" id="section_addCollection"
+            class="btn btn-sm btn-outline-primary border-0 add_collection"
+            data-prototype="{{ include(_self|replace({ "form.properties.html.twig": "section/prototype.section.html.twig"}), { section : form.section.vars.prototype })| e('html_attr') }}"
+            data-index="{{ form.section.count }}"
+    >
+		
+		<span class="svg-icon svg-icon-2">
+			<svg xmlns="http://www.w3.org/2000/svg"
+                 width="24" height="24" viewBox="0 0 24 24"
+                 fill="none">
+				<rect opacity="0.5" x="11" y="18" width="12"
+                      height="2" rx="1"
+                      transform="rotate(-90 11 18)"
+                      fill="currentColor"></rect>
+				<rect x="6" y="11" width="12" height="2"
+                      rx="1" fill="currentColor"></rect>
+			</svg>
+		</span>
+        Добавить секцию свойств
+    </button>
+</div>

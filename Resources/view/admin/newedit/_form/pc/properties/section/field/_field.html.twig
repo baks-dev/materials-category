@@ -1,0 +1,48 @@
+{% trans_default_domain 'admin.materials.category' %}
+
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex gap-2 align-items-end">
+
+            {{ form_row(field.DeleteField, {
+
+                label: '<span class="svg-icon svg-icon-2 text-nowrap">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                <rect opacity="0.5" x="7.05025" y="15.5356" width="12" height="2" rx="1" transform="rotate(-45 7.05025 15.5356)" fill="currentColor"></rect>
+                                                <rect x="8.46447" y="7.05029" width="12" height="2" rx="1" transform="rotate(45 8.46447 7.05029)" fill="currentColor"></rect>
+                                            ',
+                attr:
+                {
+                    class: 'btn-outline-danger btn-sm del-item-field border-0',
+                    'data-section' : section.vars.name
+                }
+            }) | raw }}
+
+            <div class="w-25">
+                {{ form_row(field.sort, { label : 'sort'|trans({}, 'core') }) }}
+            </div>
+            <div class="w-100">
+                {{ form_row(field.type, { label : 'Тип поля', placeholder: 'Выберите поле из списка' }) }}
+
+            </div>
+            {{ form_row(field.required, { label : 'Обязательное' }) | raw }}
+        </div>
+
+        <div class='mb-3 me-3'>Отображение:</div>
+
+        <div class="d-flex flex-wrap gap-3 align-items-end mb-3">
+
+            {{ form_widget(field.name, { label : 'В название товара' }) }}
+            {{ form_widget(field.card, { label : 'В превью товара' }) }}
+            {{ form_widget(field.photo, { label : 'На фото превью' }) }}
+            {{ form_widget(field.public, { label : 'Характеристики'}) }}
+            {{ form_widget(field.filter, { label : 'Учавствует в фильтре' }) }}
+            {{ form_widget(field.alternative, { label : 'Применить к поиску альтернатив' }) }}
+
+        </div>
+
+        {# Настрвойки локали полей секции #}
+        {{ include(_self|replace({ "_field.html.twig": "trans/_field.trans.html.twig" })) }}
+
+    </div>
+</div>

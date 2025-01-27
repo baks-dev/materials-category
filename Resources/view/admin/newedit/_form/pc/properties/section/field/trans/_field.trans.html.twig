@@ -1,0 +1,63 @@
+{% trans_default_domain 'admin.materials.category' %}
+
+
+
+{% set identifier = field.translate.vars.id %}
+
+
+
+{% if form.translate.count > 1 %}
+
+    <ul class="nav nav-pills gap-3 mb-3" id="nav-{{ identifier }}" role="tablist">
+
+        {% for translate in form.translate %}
+
+            <li class="nav-item" role="presentation">
+                <button class="btn fw-bolder nav-link{{ app.request.locale == translate.vars.value.local? ' active' : '' }}"
+                        data-bs-toggle="tab"
+                        type="button"
+                        role="tab"
+                        aria-selected="true"
+
+                        id="nav-{{ identifier }}-{{ translate.vars.value.local }}-tab"
+                        data-bs-target="#nav-{{ identifier }}-{{ translate.vars.value.local }}"
+                        aria-controls="nav-{{ identifier }}-{{ translate.vars.value.local }}"
+                >
+                    <small class="text-uppercase px-3">{{ translate.vars.value.local|trans({}, 'core') }}</small>
+                </button>
+            </li>
+
+        {% endfor %}
+    </ul>
+
+{% endif %}
+
+
+<div class="tab-content" id="nav-{{ identifier }}-content">
+
+
+    {% for translate in field.translate %}
+
+        <div class="tab-pane fade{{ app.request.locale == translate.vars.value.local? ' show active' : '' }}"
+             id="nav-{{ identifier }}-{{ translate.vars.value.local }}" role="tabpanel"
+             aria-labelledby="nav-{{ identifier }}-{{ translate.vars.value.local }}-tab">
+
+            {# Локаль #}
+            {{ form_row(translate.local) }}
+
+            {# Название секции #}
+            {# {{ 'admin.material.section.form.name'|trans }} #}
+            {{ form_row(translate.name, {
+                label : 'admin.form.label.section.trans.name'|trans
+            }) }}
+
+            {# Краткое описание #}
+            {{ form_row(translate.description, {
+                label: 'admin.form.label.section.trans.desc'|trans
+            }) }}
+        </div>
+    {% endfor %}
+
+</div>
+
+

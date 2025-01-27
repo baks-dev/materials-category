@@ -1,0 +1,41 @@
+{% trans_default_domain 'admin.materials.category' %}
+
+{{ form_row(form.offer.variation.postfix, {
+    label : 'Варианты с постфиксом'|trans,
+    attr : { class : 'change-postfix' }
+} ) }}
+
+{# Настройки локали  #}
+{{ include(_self|replace({ "_variation.html.twig": "_variation.trans.html.twig" })) }}
+
+{{ form_row(form.offer.variation.image, {  label : 'Возможность загрузки пользовательского изображение'|trans } ) }}
+
+{{ form_row(form.offer.variation.article, {  label : 'Варианты с Артикулом'|trans } ) }}
+
+{{ form_row(form.offer.variation.price, {  label : 'Варианты с ценой'|trans } ) }}
+
+{{ form_row(form.offer.variation.quantitative, {  label : 'Количественный учет варианта'|trans } ) }}
+
+
+<div class="d-flex gap-5 align-items-center mt-3">
+
+    {{ form_row(form.offer.variation.isReference, {  label : 'Справочник'|trans, attr : { 'data-reference' : form.offer.variation.reference.vars.id,  'class' : 'is-reference' } }) }}
+
+
+
+    {{ form_row(form.offer.variation.reference, {  label : false, placeholder: 'Выберите справичник из списка...'|trans , attr : { 'class' : 'd-none' } } ) }}
+</div>
+
+
+<div class="text-muted text-break small p-3">
+    Справочник даст пользователю выбор значений согласно шаблону, иначе текстовое поле для заполнения
+</div>
+
+
+
+
+
+
+
+
+

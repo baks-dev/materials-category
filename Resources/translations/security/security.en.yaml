@@ -1,0 +1,19 @@
+ROLE_MATERIALS_CATEGORY:
+  name: 'Categories Material'
+  desc: 'Categories Material'
+
+ROLE_MATERIALS_CATEGORY_INDEX:
+  name: 'View'
+  desc: ''
+
+ROLE_MATERIALS_CATEGORY_NEW:
+  name: 'Add'
+  desc: ''
+
+ROLE_MATERIALS_CATEGORY_EDIT:
+  name: 'Edit'
+  desc: ''
+
+ROLE_MATERIALS_CATEGORY_DELETE:
+  name: 'Delete'
+  desc: ''

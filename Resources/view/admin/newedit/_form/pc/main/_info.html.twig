@@ -1,0 +1,46 @@
+{% trans_default_domain 'admin.materials.category' %}
+
+<div class="d-flex justify-content-around pb-3 radio-buttons " data-buttons="true">
+    <label class="btn p-3 border-dotted rounded-3 w-100 {{ form.info.active.vars.data ? 'active' }}">
+        <div class="d-flex align-items-center">
+            <div class="flex-grow-1">
+                <span class="h5">
+                    <div class="form-check d-flex align-items-center">
+                        {{ form_widget(form.info.active, { label: false }) }}
+                        <span>
+                            {{ 'admin.form.label.active'|trans }}
+                        </span>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </label>
+</div>
+
+
+{# Сортировка #}
+{{ form_row(form.sort, {  label : 'sort'|trans({}, 'core') }) }}
+
+{# Корневая директория #}
+
+{{ form_row(form.parent, {
+    label : 'admin.form.parent.label'|trans,
+    placeholder : 'admin.form.parent.placeholder'|trans,
+    attr: { 'data-select' : 'select2' }
+}) }}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

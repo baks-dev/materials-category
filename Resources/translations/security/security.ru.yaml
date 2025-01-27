@@ -1,0 +1,24 @@
+# Роль
+ROLE_MATERIALS_CATEGORY:
+  name: 'Категории продуктов'
+  desc: 'Категории продуктов'
+
+# Правила
+
+ROLE_MATERIALS_CATEGORY_INDEX:
+  name: 'Просмотр'
+  desc: ''
+
+ROLE_MATERIALS_CATEGORY_NEW:
+  name: 'Добавить'
+  desc: ''
+
+ROLE_MATERIALS_CATEGORY_EDIT:
+  name: 'Редактировать'
+  desc: ''
+
+ROLE_MATERIALS_CATEGORY_DELETE:
+  name: 'Удалить'
+  desc: ''
+
+
