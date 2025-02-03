@@ -1,11 +1,11 @@
 {% trans_default_domain 'admin.materials.category' %}
 
-{# СВОЙСТВА ПРОДУКТА #}
+{# СВОЙСТВА сырья #}
 
 <div class="d-flex flex-column w-100 pb-3">
     <div id="section_collection">
         {% for section in form.section %}
-            {# Секции свойств продукта #}
+            {# Секции свойств сырья #}
             {{ include(_self|replace({ "form.properties.html.twig": "section/_section.html.twig"})) }}
         {% endfor %}
     </div>

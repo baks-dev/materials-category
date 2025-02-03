@@ -54,8 +54,6 @@ final class CategoryMaterialOffersDTO implements CategoryMaterialOffersInterface
     /** Торговое предложение с артикулом */
     private bool $article = false;
 
-    /** Торговое предложение с постфиксом */
-    private bool $postfix = false;
 
     /** Настройки локали торгового предложения */
     #[Assert\Valid]
@@ -248,20 +246,6 @@ final class CategoryMaterialOffersDTO implements CategoryMaterialOffersInterface
     public function setOffer(bool $offer): void
     {
         $this->offer = $offer;
-    }
-
-
-    public function isPostfix(): bool
-    {
-        return $this->postfix;
-    }
-
-
-    /** Торговое предложение с постфиксом */
-
-    public function setPostfix(bool $postfix): void
-    {
-        $this->postfix = $postfix;
     }
 
 }

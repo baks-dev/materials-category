@@ -92,115 +92,7 @@ class CategoryMaterialNewTest extends KernelTestCase
         $CategoryMaterialDTO->setSort(123);
         self::assertEquals('123', $CategoryMaterialDTO->getSort());
 
-        $MaterialInfoDTO = $CategoryMaterialDTO->getInfo();
 
-
-        $MaterialInfoDTO->setActive(true);
-        self::assertTrue($MaterialInfoDTO->getActive());
-        $MaterialInfoDTO->setActive(false);
-        self::assertFalse($MaterialInfoDTO->getActive());
-
-
-        $MaterialInfoDTO->setUrl('test_category_url');
-        self::assertEquals('test_category_url', $MaterialInfoDTO->getUrl());
-
-
-        $CategoryMaterialDTO->getLanding();
-
-        /** @var CategoryMaterialLandingCollectionDTO $MaterialLandingCollectionDTO */
-        foreach($CategoryMaterialDTO->getLanding() as $MaterialLandingCollectionDTO)
-        {
-            $MaterialLandingCollectionDTO->setHeader('Test Landing Header');
-            self::assertEquals('Test Landing Header', $MaterialLandingCollectionDTO->getHeader());
-
-            $MaterialLandingCollectionDTO->setBottom('Test Landing Bottom');
-            self::assertEquals('Test Landing Bottom', $MaterialLandingCollectionDTO->getBottom());
-        }
-
-
-        /** @var CategoryMaterialSeoCollectionDTO $MaterialSeoCollectionDTO */
-        foreach($CategoryMaterialDTO->getSeo() as $MaterialSeoCollectionDTO)
-        {
-            $MaterialSeoCollectionDTO->setTitle('Test Category Seo Title');
-            self::assertEquals('Test Category Seo Title', $MaterialSeoCollectionDTO->getTitle());
-
-            $MaterialSeoCollectionDTO->setDescription('Test Category Seo Description');
-            self::assertEquals('Test Category Seo Description', $MaterialSeoCollectionDTO->getDescription());
-
-            $MaterialSeoCollectionDTO->setKeywords('Test Category Seo Keywords');
-            self::assertEquals('Test Category Seo Keywords', $MaterialSeoCollectionDTO->getKeywords());
-
-        }
-
-
-        /** @var CategoryMaterialSectionCollectionDTO $MaterialSectionCollectionDTO */
-
-        $MaterialSectionCollectionDTO = new CategoryMaterialSectionCollectionDTO();
-        $CategoryMaterialDTO->addSection($MaterialSectionCollectionDTO);
-        self::assertCount(1, $CategoryMaterialDTO->getSection());
-
-
-        $MaterialSectionFieldCollectionDTO = new CategoryMaterialSectionFieldCollectionDTO();
-
-        $MaterialSectionFieldCollectionDTO->setSort(112);
-        self::assertEquals(112, $MaterialSectionFieldCollectionDTO->getSort());
-
-        $MaterialSectionFieldCollectionDTO->setType($InputField = new InputField('input'));
-        self::assertSame($InputField, $MaterialSectionFieldCollectionDTO->getType());
-
-        $MaterialSectionFieldCollectionDTO->setName(true);
-        self::assertTrue($MaterialSectionFieldCollectionDTO->getName());
-        $MaterialSectionFieldCollectionDTO->setName(false);
-        self::assertFalse($MaterialSectionFieldCollectionDTO->getName());
-
-        $MaterialSectionFieldCollectionDTO->setRequired(true);
-        self::assertTrue($MaterialSectionFieldCollectionDTO->getRequired());
-        $MaterialSectionFieldCollectionDTO->setRequired(false);
-        self::assertFalse($MaterialSectionFieldCollectionDTO->getRequired());
-
-        $MaterialSectionFieldCollectionDTO->setAlternative(true);
-        self::assertTrue($MaterialSectionFieldCollectionDTO->getAlternative());
-        $MaterialSectionFieldCollectionDTO->setAlternative(false);
-        self::assertFalse($MaterialSectionFieldCollectionDTO->getAlternative());
-
-        $MaterialSectionFieldCollectionDTO->setFilter(true);
-        self::assertTrue($MaterialSectionFieldCollectionDTO->getFilter());
-        $MaterialSectionFieldCollectionDTO->setFilter(false);
-        self::assertFalse($MaterialSectionFieldCollectionDTO->getFilter());
-
-        $MaterialSectionFieldCollectionDTO->setPhoto(true);
-        self::assertTrue($MaterialSectionFieldCollectionDTO->getPhoto());
-        $MaterialSectionFieldCollectionDTO->setPhoto(false);
-        self::assertFalse($MaterialSectionFieldCollectionDTO->getPhoto());
-
-        $MaterialSectionFieldCollectionDTO->setPublic(true);
-        self::assertTrue($MaterialSectionFieldCollectionDTO->getPublic());
-        $MaterialSectionFieldCollectionDTO->setPublic(false);
-        self::assertFalse($MaterialSectionFieldCollectionDTO->getPublic());
-
-
-        /** @var CategoryMaterialSectionFieldTransDTO $MaterialSectionFieldTransDTO */
-        foreach($MaterialSectionFieldCollectionDTO->getTranslate() as $MaterialSectionFieldTransDTO)
-        {
-            $MaterialSectionFieldTransDTO->setName('Test Category Section Field Name');
-            self::assertEquals('Test Category Section Field Name', $MaterialSectionFieldTransDTO->getName());
-            $MaterialSectionFieldTransDTO->setDescription('Test Category Section Field Description');
-            self::assertEquals('Test Category Section Field Description', $MaterialSectionFieldTransDTO->getDescription());
-        }
-
-
-        $MaterialSectionCollectionDTO->addField($MaterialSectionFieldCollectionDTO);
-        self::assertCount(1, $MaterialSectionCollectionDTO->getField());
-
-        /** @var CategoryMaterialSectionTransDTO $MaterialSectionTransDTO */
-        foreach($MaterialSectionCollectionDTO->getTranslate() as $MaterialSectionTransDTO)
-        {
-            $MaterialSectionTransDTO->setName('Test Category Section Name');
-            self::assertEquals('Test Category Section Name', $MaterialSectionTransDTO->getName());
-
-            $MaterialSectionTransDTO->setDescription('Test Category Section Description');
-            self::assertEquals('Test Category Section Description', $MaterialSectionTransDTO->getDescription());
-        }
 
 
         /** @var CategoryMaterialTransDTO $CategoryMaterialTransDTO */
@@ -223,8 +115,6 @@ class CategoryMaterialNewTest extends KernelTestCase
             $MaterialOffersTransDTO->setName('Test Category Offer Name');
             self::assertEquals('Test Category Offer Name', $MaterialOffersTransDTO->getName());
 
-            $MaterialOffersTransDTO->setPostfix('Test Category Offer Postfix');
-            self::assertEquals('Test Category Offer Postfix', $MaterialOffersTransDTO->getPostfix());
         }
 
         $CategoryMaterialOffersDTO->setArticle(false);
@@ -250,12 +140,6 @@ class CategoryMaterialNewTest extends KernelTestCase
         self::assertTrue($CategoryMaterialOffersDTO->getImage());
 
 
-        $CategoryMaterialOffersDTO->setPostfix(false);
-        self::assertFalse($CategoryMaterialOffersDTO->isPostfix());
-        $CategoryMaterialOffersDTO->setPostfix(true);
-        self::assertTrue($CategoryMaterialOffersDTO->isPostfix());
-
-
         $CategoryMaterialOffersDTO->setQuantitative(false);
         self::assertFalse($CategoryMaterialOffersDTO->getQuantitative());
         $CategoryMaterialOffersDTO->setQuantitative(true);
@@ -275,8 +159,6 @@ class CategoryMaterialNewTest extends KernelTestCase
             $CategoryMaterialVariationTransDTO->setName('Test Category Variation Name');
             self::assertEquals('Test Category Variation Name', $CategoryMaterialVariationTransDTO->getName());
 
-            $CategoryMaterialVariationTransDTO->setPostfix('Test Category Variation Postfix');
-            self::assertEquals('Test Category Variation Postfix', $CategoryMaterialVariationTransDTO->getPostfix());
         }
 
 
@@ -303,13 +185,6 @@ class CategoryMaterialNewTest extends KernelTestCase
         $CategoryMaterialVariationDTO->setImage(true);
         self::assertTrue($CategoryMaterialVariationDTO->getImage());
 
-
-        $CategoryMaterialVariationDTO->setPostfix(false);
-        self::assertFalse($CategoryMaterialVariationDTO->isPostfix());
-        $CategoryMaterialVariationDTO->setPostfix(true);
-        self::assertTrue($CategoryMaterialVariationDTO->isPostfix());
-
-
         $CategoryMaterialVariationDTO->setQuantitative(false);
         self::assertFalse($CategoryMaterialVariationDTO->getQuantitative());
         $CategoryMaterialVariationDTO->setQuantitative(true);
@@ -328,9 +203,6 @@ class CategoryMaterialNewTest extends KernelTestCase
         {
             $CategoryMaterialModificationTransDTO->setName('Test Category Modification Name');
             self::assertEquals('Test Category Modification Name', $CategoryMaterialModificationTransDTO->getName());
-
-            $CategoryMaterialModificationTransDTO->setPostfix('Test Category Modification Postfix');
-            self::assertEquals('Test Category Modification Postfix', $CategoryMaterialModificationTransDTO->getPostfix());
         }
 
 
@@ -353,13 +225,6 @@ class CategoryMaterialNewTest extends KernelTestCase
         self::assertFalse($CategoryMaterialModificationDTO->getImage());
         $CategoryMaterialModificationDTO->setImage(true);
         self::assertTrue($CategoryMaterialModificationDTO->getImage());
-
-
-        $CategoryMaterialModificationDTO->setPostfix(false);
-        self::assertFalse($CategoryMaterialModificationDTO->getPostfix());
-        $CategoryMaterialModificationDTO->setPostfix(true);
-        self::assertTrue($CategoryMaterialModificationDTO->getPostfix());
-
 
         $CategoryMaterialModificationDTO->setQuantitative(false);
         self::assertFalse($CategoryMaterialModificationDTO->getQuantitative());

@@ -52,8 +52,14 @@ final class IndexController extends AbstractController
 
         // Поиск
         $search = new SearchDTO();
-        $searchForm = $this->createForm(SearchForm::class, $search);
-        $searchForm->handleRequest($request);
+
+        $searchForm = $this
+            ->createForm(
+                type: SearchForm::class,
+                data: $search,
+                options: ['action' => $this->generateUrl('materials-category:admin.index')]
+            )
+            ->handleRequest($request);
 
         // Получаем список
         $parent = $cat ? new ParentCategoryMaterialUid($cat->getId()) : null;

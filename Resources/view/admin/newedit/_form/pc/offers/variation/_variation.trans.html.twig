@@ -41,9 +41,7 @@
             {{ form_row(translate.local) }}
             {{ form_row(translate.name, { label: 'admin.form.label.variation.name'|trans }) }}
 
-            <div class="{{ form.offer.variation.postfix.vars.id }} {{ form.offer.variation.postfix.vars.data ?: 'd-none' }}">
-                {{ form_row(translate.postfix, { label: 'admin.form.label.variation.postfix'|trans, required: form.offer.variation.postfix.vars.data }) }}
-            </div>
+
         </div>
     {% endfor %}
 </div>

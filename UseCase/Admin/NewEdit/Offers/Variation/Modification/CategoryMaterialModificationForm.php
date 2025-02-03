@@ -132,8 +132,6 @@ final class CategoryMaterialModificationForm extends AbstractType
 
         $builder->add('article', CheckboxType::class, ['required' => false]);
 
-        $builder->add('postfix', CheckboxType::class, ['required' => false]);
-
         /* Offers Trans */
         $builder->add('translate', CollectionType::class, [
             'entry_type' => Trans\CategoryMaterialModificationTransForm::class,

@@ -45,10 +45,6 @@ final class CategoryMaterialOffersTransDTO implements CategoryMaterialOffersTran
     private ?string $name = null;
 
 
-    /** Название постфикса (строка с точкой, нижнее подчеркивание тире процент скобки) */
-    #[Assert\Regex(pattern: '/^[\w \.\_\-\(\)\%]+$/iu')]
-    private ?string $postfix = null;
-
 
     public function withOffer(CategoryMaterialOffers|CategoryMaterialOffersUid $offer): self
     {
@@ -82,19 +78,6 @@ final class CategoryMaterialOffersTransDTO implements CategoryMaterialOffersTran
     public function setName(?string $name): void
     {
         $this->name = $name;
-    }
-
-    /** Название постфикса */
-
-    public function getPostfix(): ?string
-    {
-        return $this->postfix;
-    }
-
-
-    public function setPostfix(?string $postfix): void
-    {
-        $this->postfix = $postfix;
     }
 
 

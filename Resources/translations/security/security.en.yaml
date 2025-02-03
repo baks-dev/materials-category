@@ -1,8 +1,10 @@
 ROLE_MATERIALS_CATEGORY:
+  header: 'Categories Material'
   name: 'Categories Material'
   desc: 'Categories Material'
 
 ROLE_MATERIALS_CATEGORY_INDEX:
+  header: 'Categories Material'
   name: 'View'
   desc: ''
 

@@ -14,7 +14,7 @@
             {# {{ include(_self|replace({ "navbar.html.twig": "img-without-category.html.twig" })) }} #}
 
             {% set material_path =  path(
-                items[0].is_offer == true ? 'materials-material:user.model' : 'materials-material:user.detail',
+                items[0].is_offer == true ? 'materials-catalog:user.model' : 'materials-catalog:user.detail',
                 {
                     'category': url,
                     'url': items[0].url
@@ -30,7 +30,7 @@
 
             <div>
 
-                {# Если у корневой категории только продукция без вложенных категорий #}
+                {# Если у корневой категории только сырьё без вложенных категорий #}
                 <h5 class="fs-6 fw-bold" style="max-width: 190px;">
                     <a
                             class="text-dark text-decoration-none text-truncate d-block"
@@ -140,7 +140,7 @@
                         <div class="list-group">
                             <a class="list-group-item list-group-item-action rounded-1 border-0 text-primary"
 
-                               href="{{ path('materials-material:user.catalog.index') }}"
+                               href="{{ path('materials-catalog:user.catalog.index') }}"
                             ><strong>Весь каталог</strong>
                             </a>
                         </div>

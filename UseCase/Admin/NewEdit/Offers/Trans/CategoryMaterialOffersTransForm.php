@@ -53,8 +53,6 @@ final class CategoryMaterialOffersTransForm extends AbstractType
         /** Название торгового предложения */
         $builder->add('name', TextType::class);
 
-        /** Название постфикса */
-        $builder->add('postfix', TextType::class, ['required' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

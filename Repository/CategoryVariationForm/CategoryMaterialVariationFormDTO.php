@@ -36,8 +36,6 @@ final class CategoryMaterialVariationFormDTO
     public bool $price;
     public bool $quantitative;
     public bool $article;
-    public bool $postfix;
-    public ?string $postfixName;
 
     public function __construct(
         CategoryMaterialVariationUid $id,
@@ -47,8 +45,6 @@ final class CategoryMaterialVariationFormDTO
         bool $quantitative,
         bool $article,
         ?string $name,
-        bool $postfix,
-        ?string $postfixName,
     )
     {
         $this->id = $id;
@@ -58,8 +54,6 @@ final class CategoryMaterialVariationFormDTO
         $this->price = $price;
         $this->article = $article;
         $this->quantitative = $quantitative;
-        $this->postfix = $postfix;
-        $this->postfixName = $postfixName;
     }
 
 }

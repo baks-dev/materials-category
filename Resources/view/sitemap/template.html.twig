@@ -6,7 +6,7 @@
 
     {% for key, cat in category %}
         <sitemap>
-            <loc>{{ absolute_url(path('materials-material:sitemap', { category : key })) }}</loc>
+            <loc>{{ absolute_url(path('materials-catalog:sitemap', { category : key })) }}</loc>
         </sitemap>
     {% endfor %}
 </sitemapindex>

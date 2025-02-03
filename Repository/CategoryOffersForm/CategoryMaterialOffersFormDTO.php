@@ -37,10 +37,6 @@ final class CategoryMaterialOffersFormDTO
     public bool $quantitative;
     public bool $article;
 
-    public bool $postfix;
-    public ?string $postfixName;
-
-
     public function __construct(
         CategoryMaterialOffersUid $id,
         ?string $reference,
@@ -48,9 +44,7 @@ final class CategoryMaterialOffersFormDTO
         bool $price,
         bool $quantitative,
         bool $article,
-        ?string $name,
-        bool $postfix,
-        ?string $postfixName,
+        ?string $name
     )
     {
         $this->id = $id;
@@ -61,8 +55,6 @@ final class CategoryMaterialOffersFormDTO
         $this->article = $article;
         $this->quantitative = $quantitative;
 
-        $this->postfix = $postfix;
-        $this->postfixName = $postfixName;
     }
 
 }

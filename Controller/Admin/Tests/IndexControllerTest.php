@@ -27,7 +27,7 @@ use Symfony\Component\DependencyInjection\Attribute\When;
 #[When(env: 'test')]
 final class IndexControllerTest extends WebTestCase
 {
-    private const URL = '/admin/material/categorys';
+    private const string URL = '/admin/material/categorys';
 
     /**
      * Доступ по роли  ROLE_MATERIALS_CATEGORY_INDEX

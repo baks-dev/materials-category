@@ -56,9 +56,6 @@ final class CategoryMaterialVariationDTO implements CategoryMaterialVariationInt
     /** Множественный вариант с артикулом */
     private bool $article = false;
 
-    /** Множественный вариант  с постфиксом */
-    private bool $postfix = false;
-
     /** Настройки локали торгового предложения */
     #[Assert\Valid]
     private ArrayCollection $translate;
@@ -213,19 +210,6 @@ final class CategoryMaterialVariationDTO implements CategoryMaterialVariationInt
         {
             $this->modification = null;
         }
-    }
-
-
-    /** Множественный вариант  с постфиксом */
-
-    public function isPostfix(): bool
-    {
-        return $this->postfix;
-    }
-
-    public function setPostfix(bool $postfix): void
-    {
-        $this->postfix = $postfix;
     }
 
 }

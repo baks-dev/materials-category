@@ -27,7 +27,7 @@ use Symfony\Component\DependencyInjection\Attribute\When;
 #[When(env: 'test')]
 final class NewControllerTest extends WebTestCase
 {
-    private const URL = '/admin/material/category/new';
+    private const string URL = '/admin/material/category/new';
 
     /**
      * Доступ по роли ROLE_MATERIALS_CATEGORY_NEW

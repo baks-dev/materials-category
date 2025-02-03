@@ -35,7 +35,7 @@ interface CategoryMaterialCurrentEventInterface
     public function forEvent(CategoryMaterialEvent|CategoryMaterialEventUid|string $event): self;
 
     /**
-     * Метод возвращает активное событие категории продукции
+     * Метод возвращает активное событие категории сырья
      * вызов через метод forMain() либо forEvent()
      */
     public function find(): CategoryMaterialEvent|false;

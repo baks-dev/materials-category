@@ -40,7 +40,7 @@ interface CategoryMaterialChoiceInterface
     public function category(CategoryMaterial|CategoryMaterialUid|string $category): self;
 
     /**
-     * Метод возвращает коллекцию категорий продукции с названием
+     * Метод возвращает коллекцию категорий сырья с названием
      */
     public function findAll(): Generator|false;
 

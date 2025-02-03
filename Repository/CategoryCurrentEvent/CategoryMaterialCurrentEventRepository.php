@@ -75,7 +75,7 @@ final class CategoryMaterialCurrentEventRepository implements CategoryMaterialCu
         return $this;
     }
 
-    /** Метод возвращает активное событие категории продукции */
+    /** Метод возвращает активное событие категории сырья */
     public function find(): CategoryMaterialEvent|false
     {
         if($this->event === false && $this->main === false)

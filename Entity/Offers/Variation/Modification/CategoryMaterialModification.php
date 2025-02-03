@@ -74,11 +74,6 @@ class CategoryMaterialModification extends EntityState
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $article = false;
 
-    /** Модификация с постфиксом */
-    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
-    private bool $postfix = false;
-
-
     public function __construct(CategoryMaterialVariation $variation)
     {
         $this->id = new CategoryMaterialModificationUid();

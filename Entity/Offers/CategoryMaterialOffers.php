@@ -75,9 +75,6 @@ class CategoryMaterialOffers extends EntityState
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $article = false;
 
-    /** Торговое предложение с постфиксом */
-    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
-    private bool $postfix = false;
 
     /** Множественные варианты в торговом предложении */
     #[ORM\OneToOne(targetEntity: CategoryMaterialVariation::class, mappedBy: 'offer', cascade: ['all'])]

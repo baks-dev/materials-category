@@ -66,10 +66,7 @@ final class CategoryMaterialVariationFormRepository implements CategoryMaterialV
             variation.price,
             variation.quantitative,
             variation.article,
-            variation_trans.name,
-            
-            variation.postfix,
-            variation_trans.postfix
+            variation_trans.name
         )',
             CategoryMaterialVariationFormDTO::class
         );

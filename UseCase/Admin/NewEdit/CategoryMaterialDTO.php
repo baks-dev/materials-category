@@ -56,60 +56,30 @@ final class CategoryMaterialDTO implements CategoryMaterialEventInterface
     #[Assert\Valid]
     private ArrayCollection $translate;
 
-    /** Настройки локали категории */
-    #[Assert\Valid]
-    private ArrayCollection $domain;
-
-
-    /** Секции свойств продукта категории */
-    #[Assert\Valid]
-    private ArrayCollection $section;
-
-    /** Посадочные блоки */
-    #[Assert\Valid]
-    private ArrayCollection $landing;
-
     /** Торговые предложения */
     #[Assert\Valid]
     private ?CategoryMaterialOffersDTO $offer;
 
-    /** Настройки SEO категории */
-    #[Assert\Valid]
-    private ArrayCollection $seo;
-
     /** Обложка категории */
     #[Assert\Valid]
     private ?CategoryMaterialCoverDTO $cover;
-
-    /** Неизменяемые свойства категории */
-    #[Assert\Valid]
-    private CategoryMaterialInfoDTO $info;
 
     /**  Модификатор события  */
     #[Assert\Valid]
     private readonly Modify\CategoryMaterialModifyDTO $modify;
 
 
-    public function __construct(
-        ?ParentCategoryMaterialUid $parent = null,
-        //CategoryEvent $event = null,
-
-        // bool $active = true,
-        // string $url = null,
-    )
+    public function __construct(?ParentCategoryMaterialUid $parent = null)
     {
         $this->parent = $parent;
 
         $this->cover = new CategoryMaterialCoverDTO();
-        $this->info = new CategoryMaterialInfoDTO();
+
         $this->modify = new Modify\CategoryMaterialModifyDTO();
         $this->offer = new Offers\CategoryMaterialOffersDTO();
 
         $this->translate = new ArrayCollection();
-        $this->landing = new ArrayCollection();
-        $this->section = new ArrayCollection();
-        $this->seo = new ArrayCollection();
-        $this->domain = new ArrayCollection();
+
 
     }
 
@@ -147,20 +117,6 @@ final class CategoryMaterialDTO implements CategoryMaterialEventInterface
     }
 
 
-    /** Неизменяемые свойства категории INFO */
-
-    public function getInfo(): CategoryMaterialInfoDTO
-    {
-        return $this->info;
-    }
-
-
-    public function setInfo(CategoryMaterialInfoDTO $info): void
-    {
-        $this->info = $info;
-    }
-
-
     /** Настройки локали категории */
 
 
@@ -193,97 +149,6 @@ final class CategoryMaterialDTO implements CategoryMaterialEventInterface
     public function removeTranslate(CategoryMaterialTransDTO $trans): void
     {
         $this->translate->removeElement($trans);
-    }
-
-
-    /** Посадочные блоки */
-
-    public function getLanding(): ArrayCollection
-    {
-        /* Вычисляем расхождение и добавляем неопределенные локали */
-        foreach(Locale::diffLocale($this->landing) as $locale)
-        {
-            $CategoryLandingDTO = new CategoryMaterialLandingCollectionDTO();
-            $CategoryLandingDTO->setLocal($locale);
-            $this->addLanding($CategoryLandingDTO);
-        }
-
-        return $this->landing;
-    }
-
-    public function addLanding(CategoryMaterialLandingCollectionDTO $landing): void
-    {
-        if(empty($landing->getLocal()->getLocalValue()))
-        {
-            return;
-        }
-
-        if(!$this->landing->contains($landing))
-        {
-            $this->landing->add($landing);
-        }
-    }
-
-    public function removeLanding(CategoryMaterialLandingCollectionDTO $landing): void
-    {
-        $this->landing->removeElement($landing);
-    }
-
-
-    /** Настройки SEO категории */
-
-
-    public function getSeo(): ArrayCollection
-    {
-
-        /* Вычисляем расхождение и добавляем неопределенные локали */
-        foreach(Locale::diffLocale($this->seo) as $locale)
-        {
-            $CategorySeoDTO = new CategoryMaterialSeoCollectionDTO();
-            $CategorySeoDTO->setLocal($locale);
-            $this->addSeo($CategorySeoDTO);
-        }
-
-        return $this->seo;
-    }
-
-    public function addSeo(CategoryMaterialSeoCollectionDTO $seo): void
-    {
-        if(empty($seo->getLocal()->getLocalValue()))
-        {
-            return;
-        }
-
-        if(!$this->seo->contains($seo))
-        {
-            $this->seo[] = $seo;
-        }
-    }
-
-    public function removeSeo(CategoryMaterialSeoCollectionDTO $seo): void
-    {
-        $this->seo->removeElement($seo);
-    }
-
-
-    /** Секции свойств продукта категории */
-
-    public function getSection(): ArrayCollection
-    {
-        return $this->section;
-    }
-
-    public function addSection(CategoryMaterialSectionCollectionDTO $section): void
-    {
-        if(!$this->section->contains($section))
-        {
-            $this->section->add($section);
-        }
-    }
-
-    public function removeSection(CategoryMaterialSectionCollectionDTO $section): void
-    {
-        $this->section->removeElement($section);
     }
 
 

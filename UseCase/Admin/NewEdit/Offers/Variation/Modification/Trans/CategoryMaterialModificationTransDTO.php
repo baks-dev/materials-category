@@ -47,10 +47,6 @@ final class CategoryMaterialModificationTransDTO implements CategoryMaterialModi
     #[Assert\Regex(pattern: '/^[\w \.\_\-\(\)\%]+$/iu')]
     private ?string $name = null;
 
-    /** Название постфикса (строка с точкой, нижнее подчеркивание тире процент скобки) */
-    #[Assert\Regex(pattern: '/^[\w \.\_\-\(\)\%]+$/iu')]
-    private ?string $postfix = null;
-
 
     public function withModification(CategoryMaterialModificationUid|CategoryMaterialModification $modification): self
     {
@@ -88,18 +84,4 @@ final class CategoryMaterialModificationTransDTO implements CategoryMaterialModi
     {
         $this->name = $name;
     }
-
-    /** Название постфикса  */
-    public function getPostfix(): ?string
-    {
-        return $this->postfix;
-    }
-
-
-    public function setPostfix(?string $postfix): void
-    {
-        $this->postfix = $postfix;
-    }
-
-
 }

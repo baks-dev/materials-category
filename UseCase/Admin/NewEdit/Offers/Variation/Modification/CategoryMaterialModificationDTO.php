@@ -55,9 +55,6 @@ final class CategoryMaterialModificationDTO implements CategoryMaterialModificat
     /** Модификация с артикулом */
     private bool $article = false;
 
-    /** Модификация с постфиксом */
-    private bool $postfix = false;
-
     /** Настройки локали торгового предложения */
     #[Assert\Valid]
     private ArrayCollection $translate;
@@ -192,20 +189,6 @@ final class CategoryMaterialModificationDTO implements CategoryMaterialModificat
     public function setModification(bool $modification): void
     {
         $this->modification = $modification;
-    }
-
-
-    /** Модификация с постфиксом */
-
-    public function getPostfix(): bool
-    {
-        return $this->postfix;
-    }
-
-
-    public function setPostfix(bool $postfix): void
-    {
-        $this->postfix = $postfix;
     }
 
 }

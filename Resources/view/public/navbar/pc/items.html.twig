@@ -4,7 +4,7 @@
             {% if isProduct %}
                 <a
                         class="small"
-                        href="{{ path( link.is_offer == true ? 'materials-material:user.model' : 'materials-material:user.detail', {
+                        href="{{ path( link.is_offer == true ? 'materials-catalog:user.model' : 'materials-catalog:user.detail', {
                             'category': link.category_url,
                             'url': link.url
                         }) }}"
@@ -16,7 +16,7 @@
 
                 <a
                         class=" small"
-                        href="{{ path('materials-material:user.catalog.category', {'category': link.url}) }}"
+                        href="{{ path('materials-catalog:user.catalog.category', {'category': link.url}) }}"
                 >
                     {{ link.name }}
                 </a>

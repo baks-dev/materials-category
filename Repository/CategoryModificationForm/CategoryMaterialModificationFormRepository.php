@@ -70,10 +70,7 @@ final class CategoryMaterialModificationFormRepository implements CategoryMateri
             modification.price,
             modification.quantitative,
             modification.article,
-            modification_trans.name,
-            
-            modification.postfix,
-            modification_trans.postfix
+            modification_trans.name
             
         )',
             CategoryMaterialModificationFormDTO::class

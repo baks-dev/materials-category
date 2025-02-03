@@ -106,10 +106,6 @@ final class CategoryMaterialOffersForm extends AbstractType
         /** Торговое предложение с артикулом */
         $builder->add('article', CheckboxType::class, ['required' => false]);
 
-        /** Торговое предложение с постфиксом */
-        $builder->add('postfix', CheckboxType::class, ['required' => false]);
-
-
         /* Offers Trans */
         $builder->add('translate', CollectionType::class, [
             'entry_type' => Trans\CategoryMaterialOffersTransForm::class,

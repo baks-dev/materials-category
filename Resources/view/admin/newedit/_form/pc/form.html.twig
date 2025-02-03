@@ -18,40 +18,6 @@
         </button>
     </li>
 
-    <li class="nav-item">
-        <button class="btn fw-bolder nav-link"
-                data-bs-toggle="tab"
-                type="button"
-                role="tab"
-                aria-selected="true"
-
-                id="tab_landing-tab"
-                data-bs-target="#tab_landing"
-                aria-controls="nav-tab_main"
-        >
-            <small class="text-uppercase px-3">
-                {# Посадочные блоки #}
-                Посадочные блоки </small>
-        </button>
-    </li>
-
-    <li class="nav-item">
-        <button class="btn fw-bolder nav-link"
-                data-bs-toggle="tab"
-                type="button"
-                role="tab"
-                aria-selected="true"
-
-                id="tab_sections-tab"
-                data-bs-target="#tab_sections"
-                aria-controls="nav-tab_main"
-        >
-            <small class="text-uppercase px-3">
-                {# Свойства продукта #}
-                Свойства продукта </small>
-        </button>
-    </li>
-
 
     <li class="nav-item">
         <button class="btn fw-bolder nav-link"
@@ -80,21 +46,10 @@
         {{ include(_self|replace({ "form.html.twig": "main/form.main.html.twig" })) }}
     </div>
 
-    {# ПОСАДОЧНЫЕ БЛОКИ #}
-    <div class="tab-pane fade" id="tab_landing" role="tabpanel">
-        {{ include(_self|replace({ "form.html.twig": "landing/form.landing.html.twig" })) }}
-    </div>
-
-    {# СВОЙСТВА ПРОДУКТА #}
-    <div class="tab-pane fade" id="tab_sections" role="tabpanel">
-        {{ include(_self|replace({ "form.html.twig": "properties/form.properties.html.twig" })) }}
-    </div>
-
     {# ТОРГОВЫЕ ПРЕДЛОЖЕНИЯ #}
     <div class="tab-pane fade" id="tab_offers" role="tabpanel">
         {{ include(_self|replace({ "form.html.twig": "offers/form.offers.html.twig" })) }}
     </div>
-
 
 </div>
 

@@ -45,11 +45,6 @@ final class CategoryMaterialVariationTransDTO implements CategoryMaterialVariati
     #[Assert\Regex(pattern: '/^[\w \.\_\-\(\)\%]+$/iu')]
     private ?string $name = null;
 
-
-    /** Название постфикса (строка с точкой, нижнее подчеркивание тире процент скобки) */
-    #[Assert\Regex(pattern: '/^[\w \.\_\-\(\)\%]+$/iu')]
-    private ?string $postfix = null;
-
     public function withVariation(CategoryMaterialVariation|CategoryMaterialVariationUid $variation): self
     {
         $this->variation = $variation instanceof CategoryMaterialVariation ? $variation->getId() : $variation;
@@ -86,17 +81,5 @@ final class CategoryMaterialVariationTransDTO implements CategoryMaterialVariati
     {
         $this->name = $name;
     }
-
-    /** Название постфикса */
-    public function getPostfix(): ?string
-    {
-        return $this->postfix;
-    }
-
-    public function setPostfix(?string $postfix): void
-    {
-        $this->postfix = $postfix;
-    }
-
 
 }

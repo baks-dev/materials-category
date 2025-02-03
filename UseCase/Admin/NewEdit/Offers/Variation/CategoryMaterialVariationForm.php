@@ -109,9 +109,6 @@ final class CategoryMaterialVariationForm extends AbstractType
         /** Множественный вариант с артикулом */
         $builder->add('article', CheckboxType::class, ['required' => false]);
 
-        /** Множественный вариант с постфиксом */
-        $builder->add('postfix', CheckboxType::class, ['required' => false]);
-
         /* Offers Trans */
         $builder->add('translate', CollectionType::class, [
             'entry_type' => Trans\CategoryMaterialVariationTransForm::class,

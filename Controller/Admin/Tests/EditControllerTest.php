@@ -33,7 +33,7 @@ use Symfony\Component\DependencyInjection\Attribute\When;
 #[When(env: 'test')]
 final class EditControllerTest extends WebTestCase
 {
-    private const URL = '/admin/material/category/edit/%s';
+    private const string URL = '/admin/material/category/edit/%s';
 
     /**
      * Доступ по роли ROLE_MATERIALS_CATEGORY_EDIT

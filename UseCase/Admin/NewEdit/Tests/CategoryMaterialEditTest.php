@@ -199,8 +199,6 @@ class CategoryMaterialEditTest extends KernelTestCase
             self::assertEquals('Test Category Offer Name', $MaterialOffersTransDTO->getName());
             $MaterialOffersTransDTO->setName('Edit Test Category Offer Name');
 
-            self::assertEquals('Test Category Offer Postfix', $MaterialOffersTransDTO->getPostfix());
-            $MaterialOffersTransDTO->setPostfix('Edit Test Category Offer Postfix');
 
         }
 
@@ -212,8 +210,6 @@ class CategoryMaterialEditTest extends KernelTestCase
         self::assertTrue($CategoryMaterialOffersDTO->getImage());
         $CategoryMaterialOffersDTO->setImage(true);
 
-        self::assertFalse($CategoryMaterialOffersDTO->isPostfix());
-        $CategoryMaterialOffersDTO->setPostfix(true);
 
         self::assertTrue($CategoryMaterialOffersDTO->getQuantitative());
         $CategoryMaterialOffersDTO->setQuantitative(true);
@@ -233,8 +229,6 @@ class CategoryMaterialEditTest extends KernelTestCase
             self::assertEquals('Test Category Variation Name', $CategoryMaterialVariationTransDTO->getName());
             $CategoryMaterialVariationTransDTO->setName('Edit Test Category Variation Name');
 
-            self::assertEquals('Test Category Variation Postfix', $CategoryMaterialVariationTransDTO->getPostfix());
-            $CategoryMaterialVariationTransDTO->setPostfix('Edit Test Category Variation Postfix');
 
         }
 
@@ -245,9 +239,6 @@ class CategoryMaterialEditTest extends KernelTestCase
 
         self::assertTrue($CategoryMaterialVariationDTO->getImage());
         $CategoryMaterialVariationDTO->setImage(true);
-
-        self::assertFalse($CategoryMaterialVariationDTO->isPostfix());
-        $CategoryMaterialVariationDTO->setPostfix(true);
 
         self::assertTrue($CategoryMaterialVariationDTO->getQuantitative());
         $CategoryMaterialVariationDTO->setQuantitative(true);
@@ -264,9 +255,6 @@ class CategoryMaterialEditTest extends KernelTestCase
             self::assertEquals('Test Category Modification Name', $CategoryMaterialModificationTransDTO->getName());
             $CategoryMaterialModificationTransDTO->setName('Edit Test Category Modification Name');
 
-            self::assertEquals('Test Category Modification Postfix', $CategoryMaterialModificationTransDTO->getPostfix());
-            $CategoryMaterialModificationTransDTO->setPostfix('Edit Test Category Modification Postfix');
-
         }
 
         self::assertTrue($CategoryMaterialModificationDTO->isModification());
@@ -276,9 +264,6 @@ class CategoryMaterialEditTest extends KernelTestCase
 
         self::assertTrue($CategoryMaterialModificationDTO->getImage());
         $CategoryMaterialModificationDTO->setImage(false);
-
-        self::assertTrue($CategoryMaterialModificationDTO->getPostfix());
-        $CategoryMaterialModificationDTO->setPostfix(false);
 
         self::assertTrue($CategoryMaterialModificationDTO->getQuantitative());
         $CategoryMaterialModificationDTO->setQuantitative(false);

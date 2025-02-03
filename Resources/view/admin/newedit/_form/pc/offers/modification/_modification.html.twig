@@ -1,9 +1,6 @@
 {% trans_default_domain 'admin.materials.category' %}
 
-{{ form_row(form.offer.variation.modification.postfix, {
-    label : 'Модификации с постфиксом'|trans,
-    attr : { class : 'change-postfix' }
-} ) }}
+
 
 {# Настройки локали  #}
 {{ include(_self|replace({ "_modification.html.twig": "_modification.trans.html.twig" })) }}

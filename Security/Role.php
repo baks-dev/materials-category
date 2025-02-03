@@ -27,6 +27,7 @@ namespace BaksDev\Materials\Category\Security;
 
 use BaksDev\Menu\Admin\Command\Upgrade\MenuAdminInterface;
 use BaksDev\Menu\Admin\Type\SectionGroup\Group\Collection\MenuAdminSectionGroupCollectionInterface;
+use BaksDev\Products\Category\Security\MenuGroupProducts;
 use BaksDev\Products\Stocks\Security\MenuGroupStocks;
 use BaksDev\Users\Profile\Group\Security\RoleInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
@@ -35,7 +36,7 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 #[AutoconfigureTag('baks.menu.admin')]
 final class Role implements RoleInterface, MenuAdminInterface
 {
-    public const ROLE = 'ROLE_MATERIALS_CATEGORY';
+    public const string ROLE = 'ROLE_MATERIALS_CATEGORY';
 
     public function getRole(): string
     {
@@ -55,13 +56,13 @@ final class Role implements RoleInterface, MenuAdminInterface
     /** Метод возвращает секцию, в которую помещается ссылка на раздел */
     public function getGroupMenu(): MenuAdminSectionGroupCollectionInterface|bool
     {
-        return new MenuGroupStocks();
+        return new MenuGroupProducts();
     }
 
     /** Метод возвращает позицию, в которую располагается ссылка в секции меню */
     public function getSortMenu(): int
     {
-        return 101;
+        return 261;
     }
 
     /** Метод возвращает флаг "Показать в выпадающем меню"  */

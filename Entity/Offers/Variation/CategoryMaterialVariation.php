@@ -76,10 +76,6 @@ class CategoryMaterialVariation extends EntityState
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $article = false;
 
-    /** Вариант с постфиксом */
-    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
-    private bool $postfix = false;
-
     /** Модификации в множественном варианте */
     #[ORM\OneToOne(targetEntity: CategoryMaterialModification::class, mappedBy: 'variation', cascade: ['all'])]
     private ?CategoryMaterialModification $modification;

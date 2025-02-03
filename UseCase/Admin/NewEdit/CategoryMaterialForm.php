@@ -54,10 +54,6 @@ final class CategoryMaterialForm extends AbstractType
         /** Обложка категории */
         $builder->add('cover', NewEdit\Cover\CategoryMaterialCoverForm::class);
 
-        /** Неизменяемые свойства категории */
-        $builder->add('info', NewEdit\Info\CategoryMaterialInfoForm::class);
-
-
         /** Идентификатор родительской категории */
         $builder->add(
             'parent',
@@ -85,39 +81,6 @@ final class CategoryMaterialForm extends AbstractType
             'allow_delete' => true,
             'allow_add' => true,
             'prototype_name' => '__category_translate__',
-        ]);
-
-        /** Настройки SEO категории */
-        $builder->add('seo', CollectionType::class, [
-            'entry_type' => NewEdit\Seo\CategoryMaterialSeoCollectionForm::class,
-            'entry_options' => ['label' => false],
-            'label' => false,
-            'by_reference' => false,
-            'allow_delete' => true,
-            'allow_add' => true,
-            'prototype_name' => '__category_seo__',
-        ]);
-
-        /** Посадочные блоки */
-        $builder->add('landing', CollectionType::class, [
-            'entry_type' => NewEdit\Landing\CategoryMaterialLandingCollectionForm::class,
-            'entry_options' => ['label' => false],
-            'label' => false,
-            'by_reference' => false,
-            'allow_delete' => true,
-            'allow_add' => true,
-            'prototype_name' => '__category_landing__',
-        ]);
-
-        /** Секции свойств продукта категории */
-        $builder->add('section', CollectionType::class, [
-            'entry_type' => NewEdit\Section\CategoryMaterialSectionCollectionForm::class,
-            'entry_options' => ['label' => false],
-            'label' => false,
-            'by_reference' => false,
-            'allow_delete' => true,
-            'allow_add' => true,
-            'prototype_name' => '__category_section__',
         ]);
 
 

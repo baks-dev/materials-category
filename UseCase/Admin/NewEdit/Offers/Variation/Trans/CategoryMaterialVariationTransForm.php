@@ -55,9 +55,6 @@ final class CategoryMaterialVariationTransForm extends AbstractType
         /** Название варианта */
         $builder->add('name', TextType::class);
 
-        /** Название постфикса */
-        $builder->add('postfix', TextType::class, ['required' => false]);
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void

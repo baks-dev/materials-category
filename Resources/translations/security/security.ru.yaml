@@ -1,11 +1,13 @@
 # Роль
 ROLE_MATERIALS_CATEGORY:
-  name: 'Категории продуктов'
-  desc: 'Категории продуктов'
+  header: 'Категории сырья'
+  name: 'Категории сырья'
+  desc: 'Категории сырья'
 
 # Правила
 
 ROLE_MATERIALS_CATEGORY_INDEX:
+  header: 'Категории сырья'
   name: 'Просмотр'
   desc: ''
 

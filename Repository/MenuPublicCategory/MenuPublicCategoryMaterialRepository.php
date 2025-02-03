@@ -26,21 +26,21 @@ declare(strict_types=1);
 namespace BaksDev\Materials\Category\Repository\MenuPublicCategory;
 
 use BaksDev\Core\Doctrine\DBALQueryBuilder;
-use BaksDev\Materials\Catalog\Entity\Category\ProductCategory;
-use BaksDev\Materials\Catalog\Entity\Info\ProductInfo;
-use BaksDev\Materials\Catalog\Entity\Offers\Image\ProductOfferImage;
-use BaksDev\Materials\Catalog\Entity\Offers\ProductOffer;
-use BaksDev\Materials\Catalog\Entity\Offers\Quantity\ProductOfferQuantity;
-use BaksDev\Materials\Catalog\Entity\Offers\Variation\Image\ProductVariationImage;
-use BaksDev\Materials\Catalog\Entity\Offers\Variation\Modification\Image\ProductModificationImage;
-use BaksDev\Materials\Catalog\Entity\Offers\Variation\Modification\ProductModification;
-use BaksDev\Materials\Catalog\Entity\Offers\Variation\Modification\Quantity\ProductModificationQuantity;
-use BaksDev\Materials\Catalog\Entity\Offers\Variation\ProductVariation;
-use BaksDev\Materials\Catalog\Entity\Offers\Variation\Quantity\ProductVariationQuantity;
-use BaksDev\Materials\Catalog\Entity\Photo\ProductPhoto;
-use BaksDev\Materials\Catalog\Entity\Price\ProductPrice;
-use BaksDev\Materials\Catalog\Entity\Product;
-use BaksDev\Materials\Catalog\Entity\Trans\ProductTrans;
+use BaksDev\Materials\Catalog\Entity\Category\MaterialCategory;
+use BaksDev\Materials\Catalog\Entity\Info\MaterialInfo;
+use BaksDev\Materials\Catalog\Entity\Material;
+use BaksDev\Materials\Catalog\Entity\Offers\Image\MaterialOfferImage;
+use BaksDev\Materials\Catalog\Entity\Offers\MaterialOffer;
+use BaksDev\Materials\Catalog\Entity\Offers\Quantity\MaterialOfferQuantity;
+use BaksDev\Materials\Catalog\Entity\Offers\Variation\Image\MaterialVariationImage;
+use BaksDev\Materials\Catalog\Entity\Offers\Variation\MaterialVariation;
+use BaksDev\Materials\Catalog\Entity\Offers\Variation\Modification\Image\MaterialModificationImage;
+use BaksDev\Materials\Catalog\Entity\Offers\Variation\Modification\MaterialModification;
+use BaksDev\Materials\Catalog\Entity\Offers\Variation\Modification\Quantity\MaterialModificationQuantity;
+use BaksDev\Materials\Catalog\Entity\Offers\Variation\Quantity\MaterialsVariationQuantity;
+use BaksDev\Materials\Catalog\Entity\Photo\MaterialPhoto;
+use BaksDev\Materials\Catalog\Entity\Price\MaterialPrice;
+use BaksDev\Materials\Catalog\Entity\Trans\MaterialTrans;
 use BaksDev\Materials\Category\Entity\CategoryMaterial;
 use BaksDev\Materials\Category\Entity\Cover\CategoryMaterialCover;
 use BaksDev\Materials\Category\Entity\Event\CategoryMaterialEvent;
@@ -121,11 +121,11 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             );
 
 
-        /* Продукция корневой категории */
+        /* сырьё корневой категории */
 
         $dbal->leftJoin(
             'category',
-            ProductCategory::class,
+            MaterialCategory::class,
             'material_category',
             'material_category.category = category.id AND material_category.root = true'
         );
@@ -133,14 +133,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material_category',
-            Product::class,
+            Material::class,
             'material',
             'material.event = material_category.event'
         );
 
         $dbal->leftJoin(
             'material_category',
-            ProductPrice::class,
+            MaterialPrice::class,
             'material_price',
             'material_price.event = material.event'
         );
@@ -148,7 +148,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
         $dbal
             ->leftJoin(
                 'material',
-                ProductInfo::class,
+                MaterialInfo::class,
                 'material_info',
                 'material_info.material = material.id'
             );
@@ -156,7 +156,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
         $dbal
             ->leftJoin(
                 'material',
-                ProductTrans::class,
+                MaterialTrans::class,
                 'material_trans',
                 'material_trans.event = material.event AND material_trans.local = :local'
             );
@@ -164,14 +164,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material',
-            ProductOffer::class,
+            MaterialOffer::class,
             'material_offer',
             'material_offer.event = material.event'
         );
 
         $dbal->leftJoin(
             'material_offer',
-            ProductOfferQuantity::class,
+            MaterialOfferQuantity::class,
             'material_offer_quantity',
             'material_offer_quantity.offer = material_offer.id'
         );
@@ -179,14 +179,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material_offer',
-            ProductVariation::class,
+            MaterialVariation::class,
             'material_variation',
             'material_variation.offer = material_offer.id'
         );
 
         $dbal->leftJoin(
             'material_variation',
-            ProductVariationQuantity::class,
+            MaterialsVariationQuantity::class,
             'material_variation_quantity',
             'material_variation_quantity.variation = material_variation.id'
         );
@@ -194,7 +194,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material_variation',
-            ProductModification::class,
+            MaterialModification::class,
             'material_modification',
             'material_modification.variation = material_variation.id'
         );
@@ -202,17 +202,17 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material_modification',
-            ProductModificationQuantity::class,
+            MaterialModificationQuantity::class,
             'material_modification_quantity',
             'material_modification_quantity.modification = material_modification.id'
         );
 
 
-        // Фото продукта
+        // Фото сырья
 
         $dbal->leftJoin(
             'material_modification',
-            ProductModificationImage::class,
+            MaterialModificationImage::class,
             'material_modification_image',
             '
                 material_modification_image.modification = material_modification.id AND
@@ -222,7 +222,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material_offer',
-            ProductVariationImage::class,
+            MaterialVariationImage::class,
             'material_variation_image',
             '
                 material_variation_image.variation = material_variation.id AND
@@ -232,7 +232,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material_offer',
-            ProductOfferImage::class,
+            MaterialOfferImage::class,
             'material_offer_images',
             '
 			material_variation_image.name IS NULL AND
@@ -243,7 +243,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material_offer',
-            ProductPhoto::class,
+            MaterialPhoto::class,
             'material_photo',
             '
                 material_offer_images.name IS NULL AND
@@ -322,13 +322,13 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
            
                         'image', CASE
                                  WHEN material_modification_image.name IS NOT NULL THEN
-                                        CONCAT ( '/upload/".$dbal->table(ProductModificationImage::class)."' , '/', material_modification_image.name)
+                                        CONCAT ( '/upload/".$dbal->table(MaterialModificationImage::class)."' , '/', material_modification_image.name)
                                    WHEN material_variation_image.name IS NOT NULL THEN
-                                        CONCAT ( '/upload/".$dbal->table(ProductVariationImage::class)."' , '/', material_variation_image.name)
+                                        CONCAT ( '/upload/".$dbal->table(MaterialVariationImage::class)."' , '/', material_variation_image.name)
                                    WHEN material_offer_images.name IS NOT NULL THEN
-                                        CONCAT ( '/upload/".$dbal->table(ProductOfferImage::class)."' , '/', material_offer_images.name)
+                                        CONCAT ( '/upload/".$dbal->table(MaterialOfferImage::class)."' , '/', material_offer_images.name)
                                    WHEN material_photo.name IS NOT NULL THEN
-                                        CONCAT ( '/upload/".$dbal->table(ProductPhoto::class)."' , '/', material_photo.name)
+                                        CONCAT ( '/upload/".$dbal->table(MaterialPhoto::class)."' , '/', material_photo.name)
                                    ELSE NULL
                                 END,
                                 
@@ -409,11 +409,11 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'parent_category_trans.event = parent_category_event.id  AND parent_category_trans.local = :local'
         );
 
-        // продукция вложенной категории
+        // сырьё вложенной категории
 
         $dbal->leftJoin(
             'parent_category_event',
-            ProductCategory::class,
+            MaterialCategory::class,
             'material_category_two',
             'material_category_two.category = parent_category_event.category AND material_category_two.root = true'
         );
@@ -421,14 +421,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material_category_two',
-            Product::class,
+            Material::class,
             'material_two',
             'material_two.event = material_category_two.event'
         );
 
         $dbal->leftJoin(
             'material_two',
-            ProductPrice::class,
+            MaterialPrice::class,
             'material_two_price',
             'material_two_price.event = material_two.event'
         );
@@ -437,7 +437,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
         $dbal
             ->leftJoin(
                 'material_two',
-                ProductInfo::class,
+                MaterialInfo::class,
                 'material_info_two',
                 'material_info_two.material = material_two.id'
             );
@@ -445,7 +445,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
         $dbal
             ->leftJoin(
                 'material_two',
-                ProductTrans::class,
+                MaterialTrans::class,
                 'material_trans_two',
                 'material_trans_two.event = material_two.event AND material_trans_two.local = :local'
             );
@@ -453,14 +453,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material_two',
-            ProductOffer::class,
+            MaterialOffer::class,
             'material_offer_two',
             'material_offer_two.event = material_two.event'
         );
 
         $dbal->leftJoin(
             'material_offer_two',
-            ProductOfferQuantity::class,
+            MaterialOfferQuantity::class,
             'material_offer_two_quantity',
             'material_offer_two_quantity.offer = material_offer_two.id'
         );
@@ -468,14 +468,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material_offer_two',
-            ProductVariation::class,
+            MaterialVariation::class,
             'material_variation_two',
             'material_variation_two.offer = material_offer_two.id'
         );
 
         $dbal->leftJoin(
             'material_variation_two',
-            ProductVariationQuantity::class,
+            MaterialsVariationQuantity::class,
             'material_variation_two_quantity',
             'material_variation_two_quantity.variation = material_variation_two.id'
         );
@@ -483,24 +483,24 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material_variation_two',
-            ProductModification::class,
+            MaterialModification::class,
             'material_modification_two',
             'material_modification_two.variation = material_variation_two.id'
         );
 
         $dbal->leftJoin(
             'material_modification_two',
-            ProductModificationQuantity::class,
+            MaterialModificationQuantity::class,
             'material_modification_two_quantity',
             'material_modification_two_quantity.modification = material_modification_two.id'
         );
 
 
-        // Фото продукта
+        // Фото сырья
 
         $dbal->leftJoin(
             'material_modification_two',
-            ProductModificationImage::class,
+            MaterialModificationImage::class,
             'material_modification_image_two',
             '
                 material_modification_image_two.modification = material_modification_two.id AND
@@ -510,7 +510,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material_offer_two',
-            ProductVariationImage::class,
+            MaterialVariationImage::class,
             'material_variation_image_two',
             '
                 material_variation_image_two.variation = material_variation_two.id AND
@@ -521,7 +521,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material_offer_two',
-            ProductOfferImage::class,
+            MaterialOfferImage::class,
             'material_offer_images_two',
             '
                 material_variation_image_two.name IS NULL AND
@@ -532,7 +532,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material_offer_two',
-            ProductPhoto::class,
+            MaterialPhoto::class,
             'material_photo_two',
             '
                 material_offer_images_two.name IS NULL AND
@@ -619,13 +619,13 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
                        
                         'image', CASE
                                  WHEN material_modification_image_two.name IS NOT NULL THEN
-                                        CONCAT ( '/upload/".$dbal->table(ProductModificationImage::class)."' , '/', material_modification_image_two.name)
+                                        CONCAT ( '/upload/".$dbal->table(MaterialModificationImage::class)."' , '/', material_modification_image_two.name)
                                    WHEN material_variation_image_two.name IS NOT NULL THEN
-                                        CONCAT ( '/upload/".$dbal->table(ProductVariationImage::class)."' , '/', material_variation_image_two.name)
+                                        CONCAT ( '/upload/".$dbal->table(MaterialVariationImage::class)."' , '/', material_variation_image_two.name)
                                    WHEN material_offer_images_two.name IS NOT NULL THEN
-                                        CONCAT ( '/upload/".$dbal->table(ProductOfferImage::class)."' , '/', material_offer_images_two.name)
+                                        CONCAT ( '/upload/".$dbal->table(MaterialOfferImage::class)."' , '/', material_offer_images_two.name)
                                    WHEN material_photo_two.name IS NOT NULL THEN
-                                        CONCAT ( '/upload/".$dbal->table(ProductPhoto::class)."' , '/', material_photo_two.name)
+                                        CONCAT ( '/upload/".$dbal->table(MaterialPhoto::class)."' , '/', material_photo_two.name)
                                    ELSE NULL
                                 END,
                                 
@@ -700,7 +700,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'parent_category_event_three',
-            ProductCategory::class,
+            MaterialCategory::class,
             'material_category_three',
             'material_category_three.category = parent_category_event_three.category AND material_category_three.root = true'
         );
@@ -708,14 +708,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material_category_three',
-            Product::class,
+            Material::class,
             'material_three',
             'material_three.event = material_category_three.event'
         );
 
         $dbal->leftJoin(
             'material_three',
-            ProductPrice::class,
+            MaterialPrice::class,
             'material_three_price',
             'material_three_price.event = material_three.event'
         );
@@ -723,14 +723,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material_three',
-            ProductOffer::class,
+            MaterialOffer::class,
             'material_offer_three',
             'material_offer_three.event = material_three.event'
         );
 
         $dbal->leftJoin(
             'material_offer_three',
-            ProductOfferQuantity::class,
+            MaterialOfferQuantity::class,
             'material_offer_three_quantity',
             'material_offer_three_quantity.offer = material_offer_three.id'
         );
@@ -738,14 +738,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material_offer_three',
-            ProductVariation::class,
+            MaterialVariation::class,
             'material_variation_three',
             'material_variation_three.offer = material_offer_three.id'
         );
 
         $dbal->leftJoin(
             'material_variation_three',
-            ProductVariationQuantity::class,
+            MaterialsVariationQuantity::class,
             'material_variation_three_quantity',
             'material_variation_three_quantity.variation = material_variation_three.id'
         );
@@ -753,14 +753,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->leftJoin(
             'material_variation_three',
-            ProductModification::class,
+            MaterialModification::class,
             'material_modification_three',
             'material_modification_three.variation = material_variation_three.id'
         );
 
         $dbal->leftJoin(
             'material_modification_three',
-            ProductModificationQuantity::class,
+            MaterialModificationQuantity::class,
             'material_modification_three_quantity',
             'material_modification_three_quantity.modification = material_modification_three.id'
         );
@@ -817,7 +817,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 
         $dbal->allGroupByExclude();
 
-        /** Присваиваем кеш c namespace materials-material, т.к. меню завязано на продуктах */
+        /** Присваиваем кеш c namespace materials-catalog, т.к. меню завязано на сырьях */
         return $dbal
             ->enableCache('materials-category', refresh: false)
             ->fetchAllAssociativeIndexed();

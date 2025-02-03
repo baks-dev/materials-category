@@ -66,10 +66,7 @@ final class CategoryMaterialOffersFormRepository implements CategoryMaterialOffe
             offers.price,
             offers.quantitative,
             offers.article,
-            offers_trans.name,
-            
-            offers.postfix,
-            offers_trans.postfix
+            offers_trans.name
         )',
             CategoryMaterialOffersFormDTO::class
         );

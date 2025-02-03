@@ -32,7 +32,7 @@ interface CategoryMaterialOfferInterface
     public function category(CategoryMaterial|CategoryMaterialUid|string $category): self;
 
     /**
-     * Метод получает идентификатор настройки торгового предложения продукта в категории
+     * Метод получает идентификатор настройки торгового предложения сырья в категории
      */
     public function findCategoryMaterialOffers(): ?CategoryMaterialOffers;
 }

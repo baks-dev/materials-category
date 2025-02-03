@@ -54,9 +54,6 @@ class CategoryMaterialModificationTrans extends EntityState
     #[ORM\Column(type: Types::STRING, length: 100)]
     private string $name;
 
-    /** Название постфикса */
-    #[ORM\Column(type: Types::STRING, length: 100, nullable: true)]
-    private ?string $postfix = null;
 
     public function __construct(CategoryMaterialModification $modification)
     {

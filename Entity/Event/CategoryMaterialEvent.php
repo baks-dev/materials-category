@@ -65,53 +65,29 @@ class CategoryMaterialEvent extends EntityState
     #[ORM\Column(type: ParentCategoryMaterialUid::TYPE, nullable: true)]
     private ?ParentCategoryMaterialUid $parent = null;
 
-    /** Сортировка */
-    #[ORM\Column(type: Types::SMALLINT, length: 3, options: ['default' => 500])]
-    private int $sort = 500;
-
-    /** Перевод */
-    #[ORM\OneToMany(targetEntity: CategoryMaterialDomain::class, mappedBy: 'event', cascade: ['all'])]
-    private Collection $domain;
-
+    /** Cover */
+    #[ORM\OneToOne(targetEntity: CategoryMaterialCover::class, mappedBy: 'event', cascade: ['all'])]
+    private ?CategoryMaterialCover $cover = null;
 
     /** Перевод */
     #[ORM\OneToMany(targetEntity: CategoryMaterialTrans::class, mappedBy: 'event', cascade: ['all'])]
     private Collection $translate;
 
-    /** Модификатор */
-    #[ORM\OneToOne(targetEntity: CategoryMaterialModify::class, mappedBy: 'event', cascade: ['all'])]
-    private CategoryMaterialModify $modify;
-
-    /** Info */
-    #[ORM\OneToOne(targetEntity: CategoryMaterialInfo::class, mappedBy: 'event', cascade: ['all'])]
-    private ?CategoryMaterialInfo $info;
-
-    /** Cover */
-    #[ORM\OneToOne(targetEntity: CategoryMaterialCover::class, mappedBy: 'event', cascade: ['all'])]
-    private ?CategoryMaterialCover $cover = null;
-
-    /**  Настройки SEO информации  */
-    #[ORM\OneToMany(targetEntity: CategoryMaterialSeo::class, mappedBy: 'event', cascade: ['all'])]
-    private Collection $seo;
-
-    /** Секции для свойств продукта */
-    #[ORM\OneToMany(targetEntity: CategoryMaterialSection::class, mappedBy: 'event', cascade: ['all'])]
-    #[ORM\OrderBy(['sort' => 'ASC'])]
-    private Collection $section;
-
-    /** Посадочные блоки */
-    #[ORM\OneToMany(targetEntity: CategoryMaterialLanding::class, mappedBy: 'event', cascade: ['all'])]
-    private Collection $landing;
+    /** Сортировка */
+    #[ORM\Column(type: Types::SMALLINT, length: 3, options: ['default' => 500])]
+    private int $sort = 500;
 
     /** Торговые предложения */
     #[ORM\OneToOne(targetEntity: CategoryMaterialOffers::class, mappedBy: 'event', cascade: ['all'])]
     private ?CategoryMaterialOffers $offer;
 
+    /** Модификатор */
+    #[ORM\OneToOne(targetEntity: CategoryMaterialModify::class, mappedBy: 'event', cascade: ['all'])]
+    private CategoryMaterialModify $modify;
 
     public function __construct(?ParentCategoryMaterialUid $parent = null)
     {
         $this->id = new CategoryMaterialEventUid();
-        $this->info = new CategoryMaterialInfo($this);
         $this->modify = new CategoryMaterialModify($this);
         $this->parent = $parent;
     }

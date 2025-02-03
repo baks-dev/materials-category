@@ -32,7 +32,7 @@ use BaksDev\Materials\Category\Type\Id\CategoryMaterialUid;
 use BaksDev\Materials\Category\Type\Id\CategoryUid;
 use Doctrine\ORM\Mapping as ORM;
 
-/* Категории продуктов */
+/* Категории сырья */
 
 #[ORM\Entity]
 #[ORM\Table(name: 'material_category')]
