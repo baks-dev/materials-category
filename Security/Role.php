@@ -71,7 +71,6 @@ final class Role implements RoleInterface, MenuAdminInterface
         return true;
     }
 
-
     /**
      * Метод возвращает флаг "Модальное окно".
      */
