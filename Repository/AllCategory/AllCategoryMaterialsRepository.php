@@ -187,16 +187,16 @@ final class AllCategoryMaterialsRepository implements AllCategoryMaterialsInterf
                 'category_event.id = category.event'
             );
 
-        $dbal
-            ->addSelect('category_info.url AS category_url')
-            ->join(
-                'category_event',
-                CategoryMaterialInfo::class,
-                'category_info',
-                '
-                    category_info.event = category.event AND 
-                    category_info.active IS TRUE'
-            );
+        //        $dbal
+        //            ->addSelect('category_info.url AS category_url')
+        //            ->join(
+        //                'category_event',
+        //                CategoryMaterialInfo::class,
+        //                'category_info',
+        //                '
+        //                    category_info.event = category.event AND
+        //                    category_info.active IS TRUE'
+        //            );
 
         $dbal
             ->addSelect('category_trans.name AS category_name')

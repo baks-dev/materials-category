@@ -62,14 +62,7 @@ final readonly class AllCategoryMaterialByMenuRepository implements AllCategoryM
                 'category_event.id = category.event AND category_event.parent IS NULL'
             );
 
-        $dbal
-            ->addSelect('category_info.url AS category_url')
-            ->join(
-                'category_event',
-                CategoryMaterialInfo::class,
-                'category_info',
-                'category_info.event = category.event AND category_info.active = true'
-            );
+
 
         /* Обложка */
         $dbal
@@ -116,13 +109,6 @@ final readonly class AllCategoryMaterialByMenuRepository implements AllCategoryM
 
         $dbal->leftJoin(
             'parent_category_event',
-            CategoryMaterialInfo::class,
-            'parent_category_info',
-            'parent_category_info.event = parent_category_event.id'
-        );
-
-        $dbal->leftJoin(
-            'parent_category_event',
             CategoryMaterialCover::class,
             'parent_category_cover',
             'parent_category_cover.event = parent_category_event.id'
@@ -143,10 +129,7 @@ final readonly class AllCategoryMaterialByMenuRepository implements AllCategoryM
 				JSONB_BUILD_OBJECT
 				(
 					'0', parent_category_event.sort,
-					
-					'parent_category_url', parent_category_info.url,
-					'parent_category_counter', parent_category_info.counter,
-					
+	
 					'parent_category_cover_name', 
 					CASE 
 					    WHEN parent_category_cover.name IS NOT NULL 

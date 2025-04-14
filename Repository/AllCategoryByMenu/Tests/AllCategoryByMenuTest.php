@@ -59,7 +59,6 @@ class AllCategoryByMenuTest extends KernelTestCase
         self::assertTrue(array_key_exists('event', $data));
         self::assertTrue(array_key_exists('category_sort', $data));
         self::assertTrue(array_key_exists('category_parent', $data));
-        self::assertTrue(array_key_exists('category_url', $data));
         self::assertTrue(array_key_exists('category_cover_ext', $data));
         self::assertTrue(array_key_exists('category_cover_cdn', $data));
         self::assertTrue(array_key_exists('category_cover_dir', $data));

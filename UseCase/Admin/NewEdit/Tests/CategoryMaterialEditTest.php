@@ -25,25 +25,16 @@ declare(strict_types=1);
 
 namespace BaksDev\Materials\Category\UseCase\Admin\NewEdit\Tests;
 
-use BaksDev\Core\Doctrine\DBALQueryBuilder;
-use BaksDev\Core\Type\Field\InputField;
 use BaksDev\Materials\Category\Repository\CategoryCurrentEvent\CategoryMaterialCurrentEventInterface;
 use BaksDev\Materials\Category\Type\Id\CategoryMaterialUid;
 use BaksDev\Materials\Category\UseCase\Admin\NewEdit\CategoryMaterialDTO;
-use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Landing\CategoryMaterialLandingCollectionDTO;
 use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Offers\CategoryMaterialOffersDTO;
 use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Offers\Trans\CategoryMaterialOffersTransDTO;
 use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Offers\Variation\CategoryMaterialVariationDTO;
 use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Offers\Variation\Modification\CategoryMaterialModificationDTO;
 use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Offers\Variation\Modification\Trans\CategoryMaterialModificationTransDTO;
 use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Offers\Variation\Trans\CategoryMaterialVariationTransDTO;
-use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Section\CategoryMaterialSectionCollectionDTO;
-use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Section\Fields\CategoryMaterialSectionFieldCollectionDTO;
-use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Section\Fields\Trans\CategoryMaterialSectionFieldTransDTO;
-use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Section\Trans\CategoryMaterialSectionTransDTO;
-use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Seo\CategoryMaterialSeoCollectionDTO;
 use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Trans\CategoryMaterialTransDTO;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
@@ -75,107 +66,7 @@ class CategoryMaterialEditTest extends KernelTestCase
         self::assertEquals(123, $CategoryMaterialDTO->getSort());
         $CategoryMaterialDTO->setSort(321);
 
-        $MaterialInfoDTO = $CategoryMaterialDTO->getInfo();
 
-
-        self::assertFalse($MaterialInfoDTO->getActive());
-        $MaterialInfoDTO->setActive(true);
-
-
-        self::assertEquals('test_category_url', $MaterialInfoDTO->getUrl());
-        $MaterialInfoDTO->setUrl('edit_test_category_url');
-
-
-        $CategoryMaterialDTO->getLanding();
-
-        /** @var CategoryMaterialLandingCollectionDTO $MaterialLandingCollectionDTO */
-        foreach($CategoryMaterialDTO->getLanding() as $MaterialLandingCollectionDTO)
-        {
-            self::assertEquals('Test Landing Header', $MaterialLandingCollectionDTO->getHeader());
-            $MaterialLandingCollectionDTO->setHeader('Edit Test Landing Header');
-
-            self::assertEquals('Test Landing Bottom', $MaterialLandingCollectionDTO->getBottom());
-            $MaterialLandingCollectionDTO->setBottom('Edit Test Landing Bottom');
-
-        }
-
-
-        /** @var CategoryMaterialSeoCollectionDTO $MaterialSeoCollectionDTO */
-        foreach($CategoryMaterialDTO->getSeo() as $MaterialSeoCollectionDTO)
-        {
-            self::assertEquals('Test Category Seo Title', $MaterialSeoCollectionDTO->getTitle());
-            $MaterialSeoCollectionDTO->setTitle('Edit Test Category Seo Title');
-
-            self::assertEquals('Test Category Seo Description', $MaterialSeoCollectionDTO->getDescription());
-            $MaterialSeoCollectionDTO->setDescription('Edit Test Category Seo Description');
-
-            self::assertEquals('Test Category Seo Keywords', $MaterialSeoCollectionDTO->getKeywords());
-            $MaterialSeoCollectionDTO->setKeywords('Edit Test Category Seo Keywords');
-
-        }
-
-
-        /** @var CategoryMaterialSectionCollectionDTO $MaterialSectionCollectionDTO */
-
-        self::assertCount(1, $CategoryMaterialDTO->getSection());
-        $MaterialSectionCollectionDTO = $CategoryMaterialDTO->getSection()->current();
-
-        /** @var CategoryMaterialSectionFieldCollectionDTO $MaterialSectionFieldCollectionDTO */
-
-        self::assertCount(1, $MaterialSectionCollectionDTO->getField());
-        $MaterialSectionFieldCollectionDTO = $MaterialSectionCollectionDTO->getField()->current();
-
-        self::assertEquals(112, $MaterialSectionFieldCollectionDTO->getSort());
-        $MaterialSectionFieldCollectionDTO->setSort(211);
-
-        self::assertTrue($MaterialSectionFieldCollectionDTO->getType()->getType() === 'input');
-
-
-        self::assertFalse($MaterialSectionFieldCollectionDTO->getName());
-        $MaterialSectionFieldCollectionDTO->setName(true);
-
-
-        self::assertFalse($MaterialSectionFieldCollectionDTO->getRequired());
-        $MaterialSectionFieldCollectionDTO->setRequired(true);
-
-
-        self::assertFalse($MaterialSectionFieldCollectionDTO->getAlternative());
-        $MaterialSectionFieldCollectionDTO->setAlternative(true);
-
-        self::assertFalse($MaterialSectionFieldCollectionDTO->getFilter());
-        $MaterialSectionFieldCollectionDTO->setFilter(true);
-
-
-        self::assertFalse($MaterialSectionFieldCollectionDTO->getPhoto());
-        $MaterialSectionFieldCollectionDTO->setPhoto(true);
-
-
-        self::assertFalse($MaterialSectionFieldCollectionDTO->getPublic());
-        $MaterialSectionFieldCollectionDTO->setPublic(true);
-
-
-        /** @var CategoryMaterialSectionFieldTransDTO $MaterialSectionFieldTransDTO */
-        foreach($MaterialSectionFieldCollectionDTO->getTranslate() as $MaterialSectionFieldTransDTO)
-        {
-            self::assertEquals('Test Category Section Field Name', $MaterialSectionFieldTransDTO->getName());
-            $MaterialSectionFieldTransDTO->setName('Edit Test Category Section Field Name');
-
-            self::assertEquals('Test Category Section Field Description', $MaterialSectionFieldTransDTO->getDescription());
-            $MaterialSectionFieldTransDTO->setDescription('Edit Category Section Field Description');
-
-        }
-
-
-        /** @var CategoryMaterialSectionTransDTO $MaterialSectionTransDTO */
-        foreach($MaterialSectionCollectionDTO->getTranslate() as $MaterialSectionTransDTO)
-        {
-            self::assertEquals('Test Category Section Name', $MaterialSectionTransDTO->getName());
-            $MaterialSectionTransDTO->setName('Edit Test Category Section Name');
-
-            self::assertEquals('Test Category Section Description', $MaterialSectionTransDTO->getDescription());
-            $MaterialSectionTransDTO->setDescription('Edit Test Category Section Description');
-
-        }
 
 
         /** @var CategoryMaterialTransDTO $CategoryMaterialTransDTO */

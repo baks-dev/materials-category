@@ -54,7 +54,6 @@ class AllCategoryRepositoryTest extends KernelTestCase
             "event",
             "sort",
             "parent",
-            "category_url",
             "category_name",
             "category_cover_image",
             "category_cover_cdn",
@@ -72,7 +71,7 @@ class AllCategoryRepositoryTest extends KernelTestCase
 
         foreach($array_keys as $key)
         {
-            self::assertTrue(array_key_exists($key, $current));
+            self::assertTrue(array_key_exists($key, $current), sprintf('Отсутствует ключ в запросе %s', $key));
         }
 
     }
