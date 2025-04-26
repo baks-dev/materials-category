@@ -86,9 +86,9 @@ final class CategoryMaterialOffersFormRepository implements CategoryMaterialOffe
                 )
                 ->where('category.id = :category')
                 ->setParameter(
-                    'category',
-                    $this->category,
-                    CategoryMaterialUid::TYPE
+                    key: 'category',
+                    value: $this->category,
+                    type: CategoryMaterialUid::TYPE
                 );
         }
 

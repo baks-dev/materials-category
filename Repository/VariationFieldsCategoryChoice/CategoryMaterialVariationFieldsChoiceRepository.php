@@ -26,13 +26,11 @@ declare(strict_types=1);
 namespace BaksDev\Materials\Category\Repository\VariationFieldsCategoryChoice;
 
 use BaksDev\Core\Doctrine\ORMQueryBuilder;
-use BaksDev\Core\Type\Locale\Locale;
 use BaksDev\Materials\Category\Entity\Offers\CategoryMaterialOffers;
 use BaksDev\Materials\Category\Entity\Offers\Variation\CategoryMaterialVariation;
 use BaksDev\Materials\Category\Entity\Offers\Variation\Trans\CategoryMaterialVariationTrans;
 use BaksDev\Materials\Category\Type\Offers\Id\CategoryMaterialOffersUid;
 use BaksDev\Materials\Category\Type\Offers\Variation\CategoryMaterialVariationUid;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class CategoryMaterialVariationFieldsChoiceRepository implements CategoryMaterialVariationFieldsChoiceInterface
 {
@@ -70,17 +68,16 @@ final class CategoryMaterialVariationFieldsChoiceRepository implements CategoryM
 
         $qb->select($select);
 
-        $qb
-            ->from(CategoryMaterialOffers::class, 'offer');
+        $qb->from(CategoryMaterialOffers::class, 'offer');
 
         if($this->offer)
         {
             $qb
                 ->where('offer.id = :offer')
                 ->setParameter(
-                    'offer',
-                    $this->offer,
-                    CategoryMaterialOffersUid::TYPE
+                    key: 'offer',
+                    value: $this->offer,
+                    type: CategoryMaterialOffersUid::TYPE
                 );
         }
 
@@ -100,7 +97,7 @@ final class CategoryMaterialVariationFieldsChoiceRepository implements CategoryM
         );
 
         /* Кешируем результат ORM */
-        return $qb->enableCache('materials-category', 86400)->getOneOrNullResult();
+        return $qb->getOneOrNullResult();
 
     }
 }

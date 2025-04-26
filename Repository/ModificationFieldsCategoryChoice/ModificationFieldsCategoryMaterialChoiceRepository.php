@@ -74,9 +74,9 @@ final class ModificationFieldsCategoryMaterialChoiceRepository implements Modifi
             $orm
                 ->where('variation.id = :variation')
                 ->setParameter(
-                    'variation',
-                    $this->variation,
-                    CategoryMaterialVariationUid::TYPE
+                    key: 'variation',
+                    value: $this->variation,
+                    type: CategoryMaterialVariationUid::TYPE
                 );
         }
 
@@ -97,7 +97,7 @@ final class ModificationFieldsCategoryMaterialChoiceRepository implements Modifi
 
 
         /* Кешируем результат ORM */
-        return $orm->enableCache('materials-category', 86400)->getOneOrNullResult();
+        return $orm->getOneOrNullResult();
 
     }
 

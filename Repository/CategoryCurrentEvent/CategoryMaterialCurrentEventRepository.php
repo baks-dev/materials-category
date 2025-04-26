@@ -95,15 +95,23 @@ final class CategoryMaterialCurrentEventRepository implements CategoryMaterialCu
             $qb
                 ->from(CategoryMaterial::class, 'main')
                 ->where('main.id = :main')
-                ->setParameter('main', $this->main, CategoryMaterialUid::TYPE);
+                ->setParameter(
+                    key: 'main',
+                    value: $this->main,
+                    type: CategoryMaterialUid::TYPE
+                );
         }
 
-        if($this->event !== false)
+        if(false === ($this->event instanceof CategoryMaterialEventUid))
         {
             $qb
                 ->from(CategoryMaterialEvent::class, 'event')
                 ->where('event.id = :event')
-                ->setParameter('event', $this->event, CategoryMaterialEventUid::TYPE);
+                ->setParameter(
+                    key: 'event',
+                    value: $this->event,
+                    type: CategoryMaterialEventUid::TYPE
+                );
 
             $qb->join(
                 CategoryMaterial::class,
@@ -112,7 +120,6 @@ final class CategoryMaterialCurrentEventRepository implements CategoryMaterialCu
                 'main.id = event.category'
             );
         }
-
 
         $qb
             ->select('current')
@@ -123,6 +130,6 @@ final class CategoryMaterialCurrentEventRepository implements CategoryMaterialCu
                 'current.id = main.event'
             );
 
-        return $qb->getQuery()->getOneOrNullResult() ?: false;
+        return $qb->getOneOrNullResult() ?: false;
     }
 }

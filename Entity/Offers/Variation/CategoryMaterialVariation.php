@@ -53,7 +53,7 @@ class CategoryMaterialVariation extends EntityState
     private CategoryMaterialOffers $offer;
 
     /** Перевод */
-    #[ORM\OneToMany(targetEntity: Trans\CategoryMaterialVariationTrans::class, mappedBy: 'variation', cascade: ['all'])]
+    #[ORM\OneToMany(targetEntity: Trans\CategoryMaterialVariationTrans::class, mappedBy: 'variation', cascade: ['all'], fetch: 'EAGER')]
     private Collection $translate;
 
     /** Справочник */
@@ -77,7 +77,7 @@ class CategoryMaterialVariation extends EntityState
     private bool $article = false;
 
     /** Модификации в множественном варианте */
-    #[ORM\OneToOne(targetEntity: CategoryMaterialModification::class, mappedBy: 'variation', cascade: ['all'])]
+    #[ORM\OneToOne(targetEntity: CategoryMaterialModification::class, mappedBy: 'variation', cascade: ['all'], fetch: 'EAGER')]
     private ?CategoryMaterialModification $modification;
 
 

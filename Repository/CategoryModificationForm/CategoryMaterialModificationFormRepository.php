@@ -85,9 +85,9 @@ final class CategoryMaterialModificationFormRepository implements CategoryMateri
             $qb
                 ->where('modification.variation = :variation')
                 ->setParameter(
-                    'variation',
-                    $this->variation,
-                    CategoryMaterialVariationUid::TYPE
+                    key: 'variation',
+                    value: $this->variation,
+                    type: CategoryMaterialVariationUid::TYPE
                 );
         }
 
@@ -125,7 +125,7 @@ final class CategoryMaterialModificationFormRepository implements CategoryMateri
             );
 
 
-        return $qb->getQuery()->getOneOrNullResult();
+        return $qb->getOneOrNullResult();
 
     }
 

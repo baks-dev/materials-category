@@ -29,7 +29,6 @@ use BaksDev\Core\Doctrine\ORMQueryBuilder;
 use BaksDev\Materials\Category\Entity\Offers\CategoryMaterialOffers;
 use BaksDev\Materials\Category\Entity\Offers\Variation\CategoryMaterialVariation;
 use BaksDev\Materials\Category\Type\Offers\Id\CategoryMaterialOffersUid;
-use Doctrine\ORM\EntityManagerInterface;
 
 final class CategoryMaterialVariationByOfferRepository implements CategoryMaterialVariationByOfferInterface
 {
@@ -59,7 +58,6 @@ final class CategoryMaterialVariationByOfferRepository implements CategoryMateri
      */
     public function findCategoryMaterialVariation(): ?CategoryMaterialVariation
     {
-
         $qb = $this->ORMQueryBuilder->createQueryBuilder(self::class);
 
         $qb->from(CategoryMaterialOffers::class, 'offer');
@@ -69,9 +67,9 @@ final class CategoryMaterialVariationByOfferRepository implements CategoryMateri
             $qb
                 ->where('offer.id = :offer')
                 ->setParameter(
-                    'offer',
-                    $this->offer,
-                    CategoryMaterialOffersUid::TYPE
+                    key: 'offer',
+                    value: $this->offer,
+                    type: CategoryMaterialOffersUid::TYPE
                 );
         }
         $qb
@@ -84,6 +82,6 @@ final class CategoryMaterialVariationByOfferRepository implements CategoryMateri
             );
 
 
-        return $qb->enableCache('materials-category')->getOneOrNullResult();
+        return $qb->getOneOrNullResult();
     }
 }

@@ -66,11 +66,11 @@ class CategoryMaterialEvent extends EntityState
     private ?ParentCategoryMaterialUid $parent = null;
 
     /** Cover */
-    #[ORM\OneToOne(targetEntity: CategoryMaterialCover::class, mappedBy: 'event', cascade: ['all'])]
+    #[ORM\OneToOne(targetEntity: CategoryMaterialCover::class, mappedBy: 'event', cascade: ['all'], fetch: 'EAGER')]
     private ?CategoryMaterialCover $cover = null;
 
     /** Перевод */
-    #[ORM\OneToMany(targetEntity: CategoryMaterialTrans::class, mappedBy: 'event', cascade: ['all'])]
+    #[ORM\OneToMany(targetEntity: CategoryMaterialTrans::class, mappedBy: 'event', cascade: ['all'], fetch: 'EAGER')]
     private Collection $translate;
 
     /** Сортировка */
@@ -78,11 +78,11 @@ class CategoryMaterialEvent extends EntityState
     private int $sort = 500;
 
     /** Торговые предложения */
-    #[ORM\OneToOne(targetEntity: CategoryMaterialOffers::class, mappedBy: 'event', cascade: ['all'])]
+    #[ORM\OneToOne(targetEntity: CategoryMaterialOffers::class, mappedBy: 'event', cascade: ['all'], fetch: 'EAGER')]
     private ?CategoryMaterialOffers $offer;
 
     /** Модификатор */
-    #[ORM\OneToOne(targetEntity: CategoryMaterialModify::class, mappedBy: 'event', cascade: ['all'])]
+    #[ORM\OneToOne(targetEntity: CategoryMaterialModify::class, mappedBy: 'event', cascade: ['all'], fetch: 'EAGER')]
     private CategoryMaterialModify $modify;
 
     public function __construct(?ParentCategoryMaterialUid $parent = null)

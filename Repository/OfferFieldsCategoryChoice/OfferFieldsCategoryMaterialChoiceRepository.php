@@ -59,7 +59,6 @@ final class OfferFieldsCategoryMaterialChoiceRepository implements OfferFieldsCa
      */
     public function findAllCategoryMaterialOffers(): ?CategoryMaterialOffersUid
     {
-
         $orm = $this->ORMQueryBuilder
             ->createQueryBuilder(self::class)
             ->bindLocal();
@@ -75,9 +74,9 @@ final class OfferFieldsCategoryMaterialChoiceRepository implements OfferFieldsCa
             $orm
                 ->where('category.id = :category')
                 ->setParameter(
-                    'category',
-                    $this->category,
-                    CategoryMaterialUid::TYPE
+                    key: 'category',
+                    value: $this->category,
+                    type: CategoryMaterialUid::TYPE
                 );
         }
 
@@ -96,7 +95,7 @@ final class OfferFieldsCategoryMaterialChoiceRepository implements OfferFieldsCa
         );
 
         /* Кешируем результат ORM */
-        return $orm->enableCache('materials-category', 86400)->getOneOrNullResult();
+        return $orm->getOneOrNullResult();
 
     }
 }

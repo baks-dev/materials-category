@@ -52,7 +52,7 @@ class CategoryMaterialOffers extends EntityState
     private ?CategoryMaterialEvent $event;
 
     /** Перевод */
-    #[ORM\OneToMany(targetEntity: Trans\CategoryMaterialOffersTrans::class, mappedBy: 'offer', cascade: ['all'])]
+    #[ORM\OneToMany(targetEntity: Trans\CategoryMaterialOffersTrans::class, mappedBy: 'offer', cascade: ['all'], fetch: 'EAGER')]
     private Collection $translate;
 
     /** Справочник */
@@ -77,7 +77,7 @@ class CategoryMaterialOffers extends EntityState
 
 
     /** Множественные варианты в торговом предложении */
-    #[ORM\OneToOne(targetEntity: CategoryMaterialVariation::class, mappedBy: 'offer', cascade: ['all'])]
+    #[ORM\OneToOne(targetEntity: CategoryMaterialVariation::class, mappedBy: 'offer', cascade: ['all'], fetch: 'EAGER')]
     private ?CategoryMaterialVariation $variation;
 
     public function __construct(CategoryMaterialEvent $event)

@@ -81,9 +81,9 @@ final class CategoryMaterialVariationFormRepository implements CategoryMaterialV
             $orm
                 ->where('variation.offer = :offer')
                 ->setParameter(
-                    'offer',
-                    $this->offer,
-                    CategoryMaterialOffersUid::TYPE
+                    key: 'offer',
+                    value: $this->offer,
+                    type: CategoryMaterialOffersUid::TYPE
                 );
         }
 
@@ -110,7 +110,7 @@ final class CategoryMaterialVariationFormRepository implements CategoryMaterialV
         );
 
 
-        return $orm->getQuery()->getOneOrNullResult();
+        return $orm->getOneOrNullResult();
 
     }
 }

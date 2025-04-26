@@ -29,7 +29,6 @@ use BaksDev\Core\Doctrine\ORMQueryBuilder;
 use BaksDev\Materials\Category\Entity\CategoryMaterial;
 use BaksDev\Materials\Category\Entity\Offers\CategoryMaterialOffers;
 use BaksDev\Materials\Category\Type\Id\CategoryMaterialUid;
-use Doctrine\ORM\EntityManagerInterface;
 
 final class CategoryMaterialOfferRepository implements CategoryMaterialOfferInterface
 {
@@ -68,12 +67,11 @@ final class CategoryMaterialOfferRepository implements CategoryMaterialOfferInte
             $orm
                 ->where('category.id = :category')
                 ->setParameter(
-                    'category',
-                    $this->category,
-                    CategoryMaterialUid::TYPE
+                    key: 'category',
+                    value: $this->category,
+                    type: CategoryMaterialUid::TYPE
                 );
         }
-
 
         $orm->leftJoin(
             CategoryMaterialOffers::class,
@@ -82,7 +80,6 @@ final class CategoryMaterialOfferRepository implements CategoryMaterialOfferInte
             'offer.event = category.event'
         );
 
-
-        return $orm->getQuery()->getOneOrNullResult();
+        return $orm->getOneOrNullResult();
     }
 }

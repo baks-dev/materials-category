@@ -60,7 +60,9 @@ final class PropertyFieldsCategoryMaterialChoiceRepository implements PropertyFi
      */
     public function getPropertyFieldsCollection(): ?array
     {
-        $qb = $this->ORMQueryBuilder->createQueryBuilder(self::class)->bindLocal();
+        $qb = $this->ORMQueryBuilder
+            ->createQueryBuilder(self::class)
+            ->bindLocal();
 
         $select = sprintf(
             'NEW %s(
@@ -80,7 +82,11 @@ final class PropertyFieldsCategoryMaterialChoiceRepository implements PropertyFi
         {
             $qb
                 ->where('category.id = :category')
-                ->setParameter('category', $this->category, CategoryMaterialUid::TYPE);
+                ->setParameter(
+                    key: 'category',
+                    value: $this->category,
+                    type: CategoryMaterialUid::TYPE
+                );
         }
 
         $qb->join(
@@ -90,37 +96,6 @@ final class PropertyFieldsCategoryMaterialChoiceRepository implements PropertyFi
             'category_event.id = category.event',
         );
 
-        /* Секции свойств */
-        $qb->join(
-            CategoryMaterialSection::class,
-            'section',
-            'WITH',
-            '  section.event = category_event.id',
-        );
-
-        /* Перевод секции */
-        $qb->join(
-            CategoryMaterialSectionTrans::class,
-            'section_trans',
-            'WITH',
-            'section_trans.section = section.id AND section_trans.local = :local',
-        );
-
-        /* Перевод полей */
-        //$qb->addSelect('field.id');
-        $qb->join(
-            CategoryMaterialSectionField::class,
-            'field',
-            'WITH',
-            'field.section = section.id',
-        );
-
-        $qb->join(
-            CategoryMaterialSectionFieldTrans::class,
-            'field_trans',
-            'WITH',
-            'field_trans.field = field.id AND field_trans.local = :local',
-        );
 
         $qb->orderBy('section.sort', 'ASC');
         $qb->addOrderBy('field.sort', 'ASC');
@@ -144,7 +119,11 @@ final class PropertyFieldsCategoryMaterialChoiceRepository implements PropertyFi
         {
             $dbal
                 ->where('category.id = :category')
-                ->setParameter('category', $this->category, CategoryMaterialUid::TYPE);
+                ->setParameter(
+                    key: 'category',
+                    value: $this->category,
+                    type: CategoryMaterialUid::TYPE
+                );
         }
 
         $dbal->join(
@@ -154,36 +133,6 @@ final class PropertyFieldsCategoryMaterialChoiceRepository implements PropertyFi
             'category_event.id = category.event',
         );
 
-        /* Секции свойств */
-        $dbal->join(
-            'category_event',
-            CategoryMaterialSection::class,
-            'section',
-            'section.event = category_event.id',
-        );
-
-        /* Перевод секции */
-        $dbal->join(
-            'section',
-            CategoryMaterialSectionTrans::class,
-            'section_trans',
-            'section_trans.section = section.id AND section_trans.local = :local',
-        );
-
-        /* Перевод полей */
-        $dbal->join(
-            'section',
-            CategoryMaterialSectionField::class,
-            'field',
-            'field.section = section.id',
-        );
-
-        $dbal->join(
-            'field',
-            CategoryMaterialSectionFieldTrans::class,
-            'field_trans',
-            'field_trans.field = field.id AND field_trans.local = :local',
-        );
 
         $dbal->orderBy('section.sort', 'ASC');
         $dbal->addOrderBy('field.sort', 'ASC');
