@@ -78,12 +78,12 @@ final class CategoryMaterialCurrentEventRepository implements CategoryMaterialCu
     /** Метод возвращает активное событие категории сырья */
     public function find(): CategoryMaterialEvent|false
     {
-        if($this->event === false && $this->main === false)
+        if(false === ($this->event instanceof CategoryMaterialEventUid) && false === ($this->main instanceof CategoryMaterialUid))
         {
             throw new InvalidArgumentException('Invalid Argument CategoryMaterialEventUid or CategoryMaterialUid');
         }
 
-        if($this->event !== false && $this->main !== false)
+        if($this->event instanceof CategoryMaterialEventUid && $this->main instanceof CategoryMaterialUid)
         {
             throw new InvalidArgumentException('Вызов двух аргументов CategoryMaterialUid и CategoryMaterialUid');
         }
@@ -102,7 +102,7 @@ final class CategoryMaterialCurrentEventRepository implements CategoryMaterialCu
                 );
         }
 
-        if(false === ($this->event instanceof CategoryMaterialEventUid))
+        else if(false === ($this->event instanceof CategoryMaterialEventUid))
         {
             $qb
                 ->from(CategoryMaterialEvent::class, 'event')
