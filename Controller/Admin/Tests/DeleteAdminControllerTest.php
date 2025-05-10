@@ -18,19 +18,23 @@
 
 namespace BaksDev\Materials\Category\Controller\Admin\Tests;
 
-use BaksDev\Materials\Category\Security\VoterNew;
+use BaksDev\Materials\Category\Security\VoterDelete;
+use BaksDev\Materials\Category\Type\Event\CategoryMaterialEventUid;
 use BaksDev\Users\User\Tests\TestUserAccount;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
-/** @group materials-category */
+/**
+ * @group materials-category
+ * @depends BaksDev\Materials\Category\UseCase\Admin\NewEdit\Tests\CategoryMaterialNewTest::class
+ */
 #[When(env: 'test')]
-final class NewControllerTest extends WebTestCase
+final class DeleteAdminControllerTest extends WebTestCase
 {
-    private const string URL = '/admin/material/category/new';
+    private const string URL = '/admin/material/category/delete/%s';
 
     /**
-     * Доступ по роли ROLE_MATERIALS_CATEGORY_NEW
+     * Доступ по роли ROLE_MATERIALS_CATEGORY_DELETE
      */
     public function testRoleSuccessful(): void
     {
@@ -39,17 +43,14 @@ final class NewControllerTest extends WebTestCase
 
         foreach(TestUserAccount::getDevice() as $device)
         {
-            // ROLE_MATERIALS_CATEGORY_NEW
-            $usr = TestUserAccount::getModer(VoterNew::getVoter());
+            $usr = TestUserAccount::getModer(VoterDelete::getVoter()); // ROLE_MATERIALS_CATEGORY_DELETE
 
             $client->setServerParameter('HTTP_USER_AGENT', $device);
             $client->loginUser($usr, 'user');
-            $client->request('GET', self::URL);
+            $client->request('GET', sprintf(self::URL, CategoryMaterialEventUid::TEST));
 
             self::assertResponseIsSuccessful();
         }
-
-        self::assertTrue(true);
     }
 
     /**
@@ -66,18 +67,16 @@ final class NewControllerTest extends WebTestCase
 
             $client->setServerParameter('HTTP_USER_AGENT', $device);
             $client->loginUser($usr, 'user');
-            $client->request('GET', self::URL);
+            $client->request('GET', sprintf(self::URL, CategoryMaterialEventUid::TEST));
 
             self::assertResponseIsSuccessful();
         }
-
-        self::assertTrue(true);
     }
 
     /**
      * Доступ по роли ROLE_USER
      */
-    public function testRoleUserFiled(): void
+    public function testRoleUserDeny(): void
     {
         self::ensureKernelShutdown();
         $client = static::createClient();
@@ -88,12 +87,11 @@ final class NewControllerTest extends WebTestCase
 
             $client->setServerParameter('HTTP_USER_AGENT', $device);
             $client->loginUser($usr, 'user');
-            $client->request('GET', self::URL);
+            $client->request('GET', sprintf(self::URL, CategoryMaterialEventUid::TEST));
 
             self::assertResponseStatusCodeSame(403);
         }
 
-        self::assertTrue(true);
     }
 
     /**
@@ -101,18 +99,19 @@ final class NewControllerTest extends WebTestCase
      */
     public function testGuestFiled(): void
     {
+
         self::ensureKernelShutdown();
         $client = static::createClient();
 
         foreach(TestUserAccount::getDevice() as $device)
         {
             $client->setServerParameter('HTTP_USER_AGENT', $device);
-            $client->request('GET', self::URL);
+
+            $client->request('GET', sprintf(self::URL, CategoryMaterialEventUid::TEST));
 
             // Full authentication is required to access this resource
             self::assertResponseStatusCodeSame(401);
         }
 
-        self::assertTrue(true);
     }
 }

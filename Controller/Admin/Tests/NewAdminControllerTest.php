@@ -18,44 +18,36 @@
 
 namespace BaksDev\Materials\Category\Controller\Admin\Tests;
 
-use BaksDev\Materials\Category\Security\VoterEdit;
-use BaksDev\Materials\Category\Type\Event\CategoryMaterialEventUid;
-use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Tests\CategoryMaterialNewTest;
+use BaksDev\Materials\Category\Security\VoterNew;
 use BaksDev\Users\User\Tests\TestUserAccount;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
-
-/**
- * @group materials-category
- * @depends BaksDev\Materials\Category\UseCase\Admin\NewEdit\Tests\CategoryMaterialNewTest::class
- */
+/** @group materials-category */
 #[When(env: 'test')]
-final class EditControllerTest extends WebTestCase
+final class NewAdminControllerTest extends WebTestCase
 {
-    private const string URL = '/admin/material/category/edit/%s';
+    private const string URL = '/admin/material/category/new';
 
     /**
-     * Доступ по роли ROLE_MATERIALS_CATEGORY_EDIT
+     * Доступ по роли ROLE_MATERIALS_CATEGORY_NEW
      */
     public function testRoleSuccessful(): void
     {
-
         self::ensureKernelShutdown();
         $client = static::createClient();
 
         foreach(TestUserAccount::getDevice() as $device)
         {
-
-            $usr = TestUserAccount::getModer(VoterEdit::getVoter()); // ROLE_MATERIALS_CATEGORY_EDIT
+            // ROLE_MATERIALS_CATEGORY_NEW
+            $usr = TestUserAccount::getModer(VoterNew::getVoter());
 
             $client->setServerParameter('HTTP_USER_AGENT', $device);
             $client->loginUser($usr, 'user');
-            $client->request('GET', sprintf(self::URL, CategoryMaterialEventUid::TEST));
+            $client->request('GET', self::URL);
 
             self::assertResponseIsSuccessful();
         }
-
 
         self::assertTrue(true);
     }
@@ -65,7 +57,6 @@ final class EditControllerTest extends WebTestCase
      */
     public function testRoleAdminSuccessful(): void
     {
-
         self::ensureKernelShutdown();
         $client = static::createClient();
 
@@ -75,11 +66,10 @@ final class EditControllerTest extends WebTestCase
 
             $client->setServerParameter('HTTP_USER_AGENT', $device);
             $client->loginUser($usr, 'user');
-            $client->request('GET', sprintf(self::URL, CategoryMaterialEventUid::TEST));
+            $client->request('GET', self::URL);
 
             self::assertResponseIsSuccessful();
         }
-
 
         self::assertTrue(true);
     }
@@ -87,7 +77,7 @@ final class EditControllerTest extends WebTestCase
     /**
      * Доступ по роли ROLE_USER
      */
-    public function testRoleUserDeny(): void
+    public function testRoleUserFiled(): void
     {
         self::ensureKernelShutdown();
         $client = static::createClient();
@@ -98,11 +88,10 @@ final class EditControllerTest extends WebTestCase
 
             $client->setServerParameter('HTTP_USER_AGENT', $device);
             $client->loginUser($usr, 'user');
-            $client->request('GET', sprintf(self::URL, CategoryMaterialEventUid::TEST));
+            $client->request('GET', self::URL);
 
             self::assertResponseStatusCodeSame(403);
         }
-
 
         self::assertTrue(true);
     }
@@ -118,8 +107,7 @@ final class EditControllerTest extends WebTestCase
         foreach(TestUserAccount::getDevice() as $device)
         {
             $client->setServerParameter('HTTP_USER_AGENT', $device);
-
-            $client->request('GET', sprintf(self::URL, CategoryMaterialEventUid::TEST));
+            $client->request('GET', self::URL);
 
             // Full authentication is required to access this resource
             self::assertResponseStatusCodeSame(401);

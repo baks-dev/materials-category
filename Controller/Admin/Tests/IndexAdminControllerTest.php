@@ -18,23 +18,19 @@
 
 namespace BaksDev\Materials\Category\Controller\Admin\Tests;
 
-use BaksDev\Materials\Category\Security\VoterDelete;
-use BaksDev\Materials\Category\Type\Event\CategoryMaterialEventUid;
+use BaksDev\Materials\Category\Security\VoterIndex;
 use BaksDev\Users\User\Tests\TestUserAccount;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
-/**
- * @group materials-category
- * @depends BaksDev\Materials\Category\UseCase\Admin\NewEdit\Tests\CategoryMaterialNewTest::class
- */
+/** @group materials-category */
 #[When(env: 'test')]
-final class DeleteControllerTest extends WebTestCase
+final class IndexAdminControllerTest extends WebTestCase
 {
-    private const string URL = '/admin/material/category/delete/%s';
+    private const string URL = '/admin/material/categorys';
 
     /**
-     * Доступ по роли ROLE_MATERIALS_CATEGORY_DELETE
+     * Доступ по роли  ROLE_MATERIALS_CATEGORY_INDEX
      */
     public function testRoleSuccessful(): void
     {
@@ -43,14 +39,17 @@ final class DeleteControllerTest extends WebTestCase
 
         foreach(TestUserAccount::getDevice() as $device)
         {
-            $usr = TestUserAccount::getModer(VoterDelete::getVoter()); // ROLE_MATERIALS_CATEGORY_DELETE
-
             $client->setServerParameter('HTTP_USER_AGENT', $device);
+
+            $usr = TestUserAccount::getModer(VoterIndex::getVoter());
+
             $client->loginUser($usr, 'user');
-            $client->request('GET', sprintf(self::URL, CategoryMaterialEventUid::TEST));
+            $client->request('GET', self::URL);
 
             self::assertResponseIsSuccessful();
         }
+
+        self::assertTrue(true);
     }
 
     /**
@@ -63,43 +62,44 @@ final class DeleteControllerTest extends WebTestCase
 
         foreach(TestUserAccount::getDevice() as $device)
         {
+            $client->setServerParameter('HTTP_USER_AGENT', $device);
+
             $usr = TestUserAccount::getAdmin();
 
-            $client->setServerParameter('HTTP_USER_AGENT', $device);
             $client->loginUser($usr, 'user');
-            $client->request('GET', sprintf(self::URL, CategoryMaterialEventUid::TEST));
+            $client->request('GET', self::URL);
 
             self::assertResponseIsSuccessful();
         }
+
+        self::assertTrue(true);
     }
 
     /**
      * Доступ по роли ROLE_USER
      */
-    public function testRoleUserDeny(): void
+    public function testRoleUserFiled(): void
     {
         self::ensureKernelShutdown();
         $client = static::createClient();
 
         foreach(TestUserAccount::getDevice() as $device)
         {
-            $usr = TestUserAccount::getUsr();
-
             $client->setServerParameter('HTTP_USER_AGENT', $device);
+
+            $usr = TestUserAccount::getUsr();
             $client->loginUser($usr, 'user');
-            $client->request('GET', sprintf(self::URL, CategoryMaterialEventUid::TEST));
+            $client->request('GET', self::URL);
 
             self::assertResponseStatusCodeSame(403);
         }
 
+        self::assertTrue(true);
     }
 
-    /**
-     * Доступ по без роли
-     */
+    /** Доступ по без роли */
     public function testGuestFiled(): void
     {
-
         self::ensureKernelShutdown();
         $client = static::createClient();
 
@@ -107,11 +107,13 @@ final class DeleteControllerTest extends WebTestCase
         {
             $client->setServerParameter('HTTP_USER_AGENT', $device);
 
-            $client->request('GET', sprintf(self::URL, CategoryMaterialEventUid::TEST));
+            $client->request('GET', self::URL);
 
             // Full authentication is required to access this resource
             self::assertResponseStatusCodeSame(401);
         }
+
+        self::assertTrue(true);
 
     }
 }

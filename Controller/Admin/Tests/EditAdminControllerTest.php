@@ -18,36 +18,44 @@
 
 namespace BaksDev\Materials\Category\Controller\Admin\Tests;
 
-use BaksDev\Materials\Category\Security\VoterIndex;
+use BaksDev\Materials\Category\Security\VoterEdit;
+use BaksDev\Materials\Category\Type\Event\CategoryMaterialEventUid;
+use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Tests\CategoryMaterialNewTest;
 use BaksDev\Users\User\Tests\TestUserAccount;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
-/** @group materials-category */
+
+/**
+ * @group materials-category
+ * @depends BaksDev\Materials\Category\UseCase\Admin\NewEdit\Tests\CategoryMaterialNewTest::class
+ */
 #[When(env: 'test')]
-final class IndexControllerTest extends WebTestCase
+final class EditAdminControllerTest extends WebTestCase
 {
-    private const string URL = '/admin/material/categorys';
+    private const string URL = '/admin/material/category/edit/%s';
 
     /**
-     * Доступ по роли  ROLE_MATERIALS_CATEGORY_INDEX
+     * Доступ по роли ROLE_MATERIALS_CATEGORY_EDIT
      */
     public function testRoleSuccessful(): void
     {
+
         self::ensureKernelShutdown();
         $client = static::createClient();
 
         foreach(TestUserAccount::getDevice() as $device)
         {
+
+            $usr = TestUserAccount::getModer(VoterEdit::getVoter()); // ROLE_MATERIALS_CATEGORY_EDIT
+
             $client->setServerParameter('HTTP_USER_AGENT', $device);
-
-            $usr = TestUserAccount::getModer(VoterIndex::getVoter());
-
             $client->loginUser($usr, 'user');
-            $client->request('GET', self::URL);
+            $client->request('GET', sprintf(self::URL, CategoryMaterialEventUid::TEST));
 
             self::assertResponseIsSuccessful();
         }
+
 
         self::assertTrue(true);
     }
@@ -57,20 +65,21 @@ final class IndexControllerTest extends WebTestCase
      */
     public function testRoleAdminSuccessful(): void
     {
+
         self::ensureKernelShutdown();
         $client = static::createClient();
 
         foreach(TestUserAccount::getDevice() as $device)
         {
-            $client->setServerParameter('HTTP_USER_AGENT', $device);
-
             $usr = TestUserAccount::getAdmin();
 
+            $client->setServerParameter('HTTP_USER_AGENT', $device);
             $client->loginUser($usr, 'user');
-            $client->request('GET', self::URL);
+            $client->request('GET', sprintf(self::URL, CategoryMaterialEventUid::TEST));
 
             self::assertResponseIsSuccessful();
         }
+
 
         self::assertTrue(true);
     }
@@ -78,26 +87,29 @@ final class IndexControllerTest extends WebTestCase
     /**
      * Доступ по роли ROLE_USER
      */
-    public function testRoleUserFiled(): void
+    public function testRoleUserDeny(): void
     {
         self::ensureKernelShutdown();
         $client = static::createClient();
 
         foreach(TestUserAccount::getDevice() as $device)
         {
-            $client->setServerParameter('HTTP_USER_AGENT', $device);
-
             $usr = TestUserAccount::getUsr();
+
+            $client->setServerParameter('HTTP_USER_AGENT', $device);
             $client->loginUser($usr, 'user');
-            $client->request('GET', self::URL);
+            $client->request('GET', sprintf(self::URL, CategoryMaterialEventUid::TEST));
 
             self::assertResponseStatusCodeSame(403);
         }
 
+
         self::assertTrue(true);
     }
 
-    /** Доступ по без роли */
+    /**
+     * Доступ по без роли
+     */
     public function testGuestFiled(): void
     {
         self::ensureKernelShutdown();
@@ -107,13 +119,12 @@ final class IndexControllerTest extends WebTestCase
         {
             $client->setServerParameter('HTTP_USER_AGENT', $device);
 
-            $client->request('GET', self::URL);
+            $client->request('GET', sprintf(self::URL, CategoryMaterialEventUid::TEST));
 
             // Full authentication is required to access this resource
             self::assertResponseStatusCodeSame(401);
         }
 
         self::assertTrue(true);
-
     }
 }
