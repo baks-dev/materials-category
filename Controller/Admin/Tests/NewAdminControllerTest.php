@@ -20,11 +20,12 @@ namespace BaksDev\Materials\Category\Controller\Admin\Tests;
 
 use BaksDev\Materials\Category\Security\VoterNew;
 use BaksDev\Users\User\Tests\TestUserAccount;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
-/** @group materials-category */
 #[When(env: 'test')]
+#[Group('materials-category')]
 final class NewAdminControllerTest extends WebTestCase
 {
     private const string URL = '/admin/material/category/new';

@@ -46,14 +46,12 @@ use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Section\Trans\CategoryMater
 use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Seo\CategoryMaterialSeoCollectionDTO;
 use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Trans\CategoryMaterialTransDTO;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
-/**
- * @group materials-category
- * @group category-material-usecase
- */
 #[When(env: 'test')]
+#[Group('materials-category')]
 class CategoryMaterialNewTest extends KernelTestCase
 {
     public static function setUpBeforeClass(): void

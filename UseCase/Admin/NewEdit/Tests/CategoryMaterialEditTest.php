@@ -35,18 +35,17 @@ use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Offers\Variation\Modificati
 use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Offers\Variation\Modification\Trans\CategoryMaterialModificationTransDTO;
 use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Offers\Variation\Trans\CategoryMaterialVariationTransDTO;
 use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Trans\CategoryMaterialTransDTO;
+use PHPUnit\Framework\Attributes\DependsOnClass;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
-/**
- * @group category-material
- * @group category-material-usecase
- *
- * @depends BaksDev\Materials\Category\UseCase\Admin\NewEdit\Tests\CategoryMaterialNewTest::class
- */
+
 #[When(env: 'test')]
+#[Group('materials-category')]
 class CategoryMaterialEditTest extends KernelTestCase
 {
+    #[DependsOnClass(CategoryMaterialNewTest::class)]
     public function testUseCase(): void
     {
         /** @var CategoryMaterialCurrentEventInterface $CategoryMaterialCurrentEvent */

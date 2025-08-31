@@ -26,6 +26,7 @@ declare(strict_types=1);
 namespace BaksDev\Materials\Category\UseCase\Admin\Delete\Tests;
 
 use BaksDev\Core\Doctrine\DBALQueryBuilder;
+use BaksDev\Materials\Category\Controller\Admin\Tests\DeleteAdminControllerTest;
 use BaksDev\Materials\Category\Entity\CategoryMaterial;
 use BaksDev\Materials\Category\Repository\CategoryCurrentEvent\CategoryMaterialCurrentEventInterface;
 use BaksDev\Materials\Category\Type\Id\CategoryMaterialUid;
@@ -34,18 +35,13 @@ use BaksDev\Materials\Category\UseCase\Admin\Delete\DeleteCategoryMaterialHandle
 use BaksDev\Materials\Category\UseCase\Admin\NewEdit\CategoryMaterialHandler;
 use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Tests\CategoryMaterialEditTest;
 use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Tests\CategoryMaterialNewTest;
+use PHPUnit\Framework\Attributes\DependsOnClass;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
-/**
- * @group category-material
- * @group category-material-usecase
- *
- * @depends BaksDev\Materials\Category\UseCase\Admin\NewEdit\Tests\CategoryMaterialNewTest::class
- * @depends BaksDev\Materials\Category\UseCase\Admin\NewEdit\Tests\CategoryMaterialEditTest::class
- * @depends BaksDev\Materials\Category\Controller\Admin\Tests\DeleteControllerTest::class
- */
 #[When(env: 'test')]
+#[Group('materials-category')]
 class CategoryMaterialDeleteTest extends KernelTestCase
 {
     public static function tearDownAfterClass(): void
@@ -53,6 +49,9 @@ class CategoryMaterialDeleteTest extends KernelTestCase
         CategoryMaterialNewTest::setUpBeforeClass();
     }
 
+    #[DependsOnClass(CategoryMaterialNewTest::class)]
+    #[DependsOnClass(CategoryMaterialEditTest::class)]
+    #[DependsOnClass(DeleteAdminControllerTest::class)]
     public function testUseCase(): void
     {
         /** @var CategoryMaterialCurrentEventInterface $CategoryMaterialCurrentEvent */
@@ -73,6 +72,9 @@ class CategoryMaterialDeleteTest extends KernelTestCase
 
     }
 
+    #[DependsOnClass(CategoryMaterialNewTest::class)]
+    #[DependsOnClass(CategoryMaterialEditTest::class)]
+    #[DependsOnClass(DeleteAdminControllerTest::class)]
     public function testComplete(): void
     {
         /** @var DBALQueryBuilder $dbal */

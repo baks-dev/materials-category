@@ -22,15 +22,13 @@ use BaksDev\Materials\Category\Security\VoterEdit;
 use BaksDev\Materials\Category\Type\Event\CategoryMaterialEventUid;
 use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Tests\CategoryMaterialNewTest;
 use BaksDev\Users\User\Tests\TestUserAccount;
+use PHPUnit\Framework\Attributes\DependsOnClass;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
-
-/**
- * @group materials-category
- * @depends BaksDev\Materials\Category\UseCase\Admin\NewEdit\Tests\CategoryMaterialNewTest::class
- */
 #[When(env: 'test')]
+#[Group('materials-category')]
 final class EditAdminControllerTest extends WebTestCase
 {
     private const string URL = '/admin/material/category/edit/%s';
@@ -38,6 +36,7 @@ final class EditAdminControllerTest extends WebTestCase
     /**
      * Доступ по роли ROLE_MATERIALS_CATEGORY_EDIT
      */
+    #[DependsOnClass(CategoryMaterialNewTest::class)]
     public function testRoleSuccessful(): void
     {
 
@@ -63,6 +62,7 @@ final class EditAdminControllerTest extends WebTestCase
     /**
      * Доступ по роли ROLE_ADMIN
      */
+    #[DependsOnClass(CategoryMaterialNewTest::class)]
     public function testRoleAdminSuccessful(): void
     {
 
@@ -87,6 +87,7 @@ final class EditAdminControllerTest extends WebTestCase
     /**
      * Доступ по роли ROLE_USER
      */
+    #[DependsOnClass(CategoryMaterialNewTest::class)]
     public function testRoleUserDeny(): void
     {
         self::ensureKernelShutdown();
@@ -110,6 +111,7 @@ final class EditAdminControllerTest extends WebTestCase
     /**
      * Доступ по без роли
      */
+    #[DependsOnClass(CategoryMaterialNewTest::class)]
     public function testGuestFiled(): void
     {
         self::ensureKernelShutdown();

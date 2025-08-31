@@ -20,15 +20,15 @@ namespace BaksDev\Materials\Category\Controller\Admin\Tests;
 
 use BaksDev\Materials\Category\Security\VoterDelete;
 use BaksDev\Materials\Category\Type\Event\CategoryMaterialEventUid;
+use BaksDev\Materials\Category\UseCase\Admin\NewEdit\Tests\CategoryMaterialNewTest;
 use BaksDev\Users\User\Tests\TestUserAccount;
+use PHPUnit\Framework\Attributes\DependsOnClass;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
-/**
- * @group materials-category
- * @depends BaksDev\Materials\Category\UseCase\Admin\NewEdit\Tests\CategoryMaterialNewTest::class
- */
 #[When(env: 'test')]
+#[Group('materials-category')]
 final class DeleteAdminControllerTest extends WebTestCase
 {
     private const string URL = '/admin/material/category/delete/%s';
@@ -36,6 +36,7 @@ final class DeleteAdminControllerTest extends WebTestCase
     /**
      * Доступ по роли ROLE_MATERIALS_CATEGORY_DELETE
      */
+    #[DependsOnClass(CategoryMaterialNewTest::class)]
     public function testRoleSuccessful(): void
     {
         self::ensureKernelShutdown();
@@ -56,6 +57,7 @@ final class DeleteAdminControllerTest extends WebTestCase
     /**
      * Доступ по роли ROLE_ADMIN
      */
+    #[DependsOnClass(CategoryMaterialNewTest::class)]
     public function testRoleAdminSuccessful(): void
     {
         self::ensureKernelShutdown();
@@ -76,6 +78,7 @@ final class DeleteAdminControllerTest extends WebTestCase
     /**
      * Доступ по роли ROLE_USER
      */
+    #[DependsOnClass(CategoryMaterialNewTest::class)]
     public function testRoleUserDeny(): void
     {
         self::ensureKernelShutdown();
@@ -97,6 +100,7 @@ final class DeleteAdminControllerTest extends WebTestCase
     /**
      * Доступ по без роли
      */
+    #[DependsOnClass(CategoryMaterialNewTest::class)]
     public function testGuestFiled(): void
     {
 

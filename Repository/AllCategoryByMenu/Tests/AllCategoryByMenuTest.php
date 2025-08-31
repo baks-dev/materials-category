@@ -29,13 +29,12 @@ use BaksDev\Core\Doctrine\DBALQueryBuilder;
 use BaksDev\Core\Services\Paginator\PaginatorInterface;
 use BaksDev\Materials\Category\Repository\AllCategoryByMenu\AllCategoryMaterialByMenuInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
-/**
- * @group materials-category
- */
 #[When(env: 'test')]
+#[Group('materials-category')]
 class AllCategoryByMenuTest extends KernelTestCase
 {
     private static AllCategoryMaterialByMenuInterface $repository;
