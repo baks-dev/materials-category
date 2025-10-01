@@ -153,7 +153,7 @@
 
                             {% for i in baks_public_menu %}
 
-                                {% set image_path = '/assets/img/blank.svg' %}
+                                {% set image_path = '/assets/'~version~'/img/blank.svg' %}
 
                                 <div class="tab-pane row row-cols-3 fade {{ loop.index == 1 ? 'show active' : '' }} g-4 m-0"
                                      id="list-{{ loop.index }}" role="tabpanel"
@@ -287,7 +287,7 @@
 
 <script async
         nonce="{{ csp_nonce() }}"
-        data-src='/assets/materials-category/public-menu.min.js?v={{ version }}'
+        data-src='/assets/{{ version }}/materials-category/public-menu.min.js?v={{ version }}'
         class="lazy"
 ></script>
 
