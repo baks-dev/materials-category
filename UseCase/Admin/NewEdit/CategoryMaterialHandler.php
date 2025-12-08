@@ -29,49 +29,18 @@ use BaksDev\Core\Entity\AbstractHandler;
 use BaksDev\Materials\Category\Entity\CategoryMaterial;
 use BaksDev\Materials\Category\Entity\Event\CategoryMaterialEvent;
 use BaksDev\Materials\Category\Messenger\CategoryMaterialMessage;
-use DomainException;
 
 final class CategoryMaterialHandler extends AbstractHandler
 {
     public function handle(CategoryMaterialDTO $command): string|CategoryMaterial
     {
-
-        //        if($command->getOffer()?->isOffer())
-        //        {
-        //            $offer = $command->getOffer();
-        //
-        //            if($offer?->getVariation()->isVariation())
-        //            {
-        //                $variation = $offer?->getVariation();
-        //
-        //                if($variation->getModification()->isModification())
-        //                {
-        //
-        //
-        //                }
-        //
-        //            }
-        //
-        //        }
-
         /** Делаем сброс иерархии настроек торговых предложений  */
         $command->resetOffer();
 
         /** Валидация DTO  */
-        $this->validatorCollection->add($command);
-
-        $this->main = new CategoryMaterial();
-        $this->event = new CategoryMaterialEvent();
-
-        try
-        {
-            $command->getEvent() ? $this->preUpdate($command, false) : $this->prePersist($command);
-        }
-        catch(DomainException $errorUniqid)
-        {
-            return $errorUniqid->getMessage();
-        }
-
+        $this
+            ->setCommand($command)
+            ->preEventPersistOrUpdate(CategoryMaterial::class, CategoryMaterialEvent::class);
 
         /** Загружаем файл обложки раздела */
 
@@ -94,7 +63,7 @@ final class CategoryMaterialHandler extends AbstractHandler
         }
 
 
-        $this->entityManager->flush();
+        $this->flush();
 
         /* Отправляем событие в шину  */
         $this->messageDispatch->dispatch(
