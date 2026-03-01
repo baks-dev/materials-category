@@ -27,7 +27,7 @@ namespace BaksDev\Materials\Category\Messenger;
 
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-#[AsMessageHandler]
+#[AsMessageHandler(priority: 0)]
 final class CategoryMaterialNullHandler
 {
     public function __invoke(CategoryMaterialMessage $message): void {}
