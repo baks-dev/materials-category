@@ -27,7 +27,9 @@ use BaksDev\Materials\Category\Entity\CategoryMaterial;
 use BaksDev\Materials\Category\Entity\Event\CategoryMaterialEvent;
 use BaksDev\Materials\Category\Type\Event\CategoryMaterialEventUid;
 use BaksDev\Materials\Category\Type\Id\CategoryMaterialUid;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 
+#[Autoconfigure(public: true)]
 interface CategoryMaterialCurrentEventInterface
 {
     public function forMain(CategoryMaterial|CategoryMaterialUid|string $main): self;
