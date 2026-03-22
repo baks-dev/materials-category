@@ -61,7 +61,7 @@ final class NewController extends AbstractController
 
         $parent = $cat ? new ParentCategoryMaterialUid($cat->getId()) : null;
         $Event = $id ? $entityManager->getRepository(CategoryEntity\Event\CategoryMaterialEvent::class)->find(
-            $id
+            $id,
         ) : null;
 
         $category = new CategoryMaterialDTO($parent);

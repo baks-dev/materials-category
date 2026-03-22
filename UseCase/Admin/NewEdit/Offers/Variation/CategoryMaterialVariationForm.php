@@ -63,7 +63,7 @@ final class CategoryMaterialVariationForm extends AbstractType
                 $form->add(
                     'isReference',
                     CheckboxType::class,
-                    ['mapped' => false, 'required' => false, 'data' => true,]
+                    ['mapped' => false, 'required' => false, 'data' => true,],
                 );
             }
         });
@@ -82,7 +82,7 @@ final class CategoryMaterialVariationForm extends AbstractType
                 'choice_label' => function($choice) {
                     return $this->translator->trans('label', domain: $choice->domain());
                 },
-            ]
+            ],
         );
 
         $builder->get('reference')->addModelTransformer(
@@ -92,8 +92,8 @@ final class CategoryMaterialVariationForm extends AbstractType
                 },
                 function($type) {
                     return $type instanceof ReferenceChoiceInterface ? new InputField($type) : null;
-                }
-            )
+                },
+            ),
         );
 
 

@@ -47,39 +47,34 @@ class CategoryMaterial
     #[ORM\Column(type: CategoryMaterialEventUid::TYPE, unique: true, nullable: false)]
     private ?CategoryMaterialEventUid $event = null;
 
-    public function __toString(): string
-    {
-        return (string) $this->id;
-    }
-
-
     public function __construct()
     {
         $this->id = new CategoryMaterialUid();
     }
 
-
-    public function getId(): CategoryMaterialUid
+    public function __toString(): string
     {
-        return $this->id;
+        return (string) $this->id;
     }
-
 
     public function restore(CategoryMaterialUid $id): void
     {
         $this->id = $id;
     }
 
-
     public function getEvent(): ?CategoryMaterialEventUid
     {
         return $this->event;
     }
 
-
     public function setEvent(CategoryMaterialEvent|CategoryMaterialEventUid $event): void
     {
         $this->event = $event instanceof CategoryMaterialEvent ? $event->getId() : $event;
+    }
+
+    public function getId(): CategoryMaterialUid
+    {
+        return $this->id;
     }
 
 }

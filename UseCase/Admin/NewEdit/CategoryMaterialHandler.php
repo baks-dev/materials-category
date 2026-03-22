@@ -68,7 +68,7 @@ final class CategoryMaterialHandler extends AbstractHandler
         /* Отправляем событие в шину  */
         $this->messageDispatch->dispatch(
             message: new CategoryMaterialMessage($this->main->getId(), $this->main->getEvent(), $command->getEvent()),
-            transport: 'materials-category'
+            transport: 'materials-category',
         );
 
         return $this->main;

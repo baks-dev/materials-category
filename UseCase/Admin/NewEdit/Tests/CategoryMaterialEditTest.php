@@ -66,8 +66,6 @@ class CategoryMaterialEditTest extends KernelTestCase
         $CategoryMaterialDTO->setSort(321);
 
 
-
-
         /** @var CategoryMaterialTransDTO $CategoryMaterialTransDTO */
         foreach($CategoryMaterialDTO->getTranslate() as $CategoryMaterialTransDTO)
         {

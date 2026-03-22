@@ -91,8 +91,6 @@ class CategoryMaterialNewTest extends KernelTestCase
         self::assertEquals('123', $CategoryMaterialDTO->getSort());
 
 
-
-
         /** @var CategoryMaterialTransDTO $CategoryMaterialTransDTO */
         foreach($CategoryMaterialDTO->getTranslate() as $CategoryMaterialTransDTO)
         {

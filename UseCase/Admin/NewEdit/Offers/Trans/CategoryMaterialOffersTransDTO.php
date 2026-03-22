@@ -45,7 +45,6 @@ final class CategoryMaterialOffersTransDTO implements CategoryMaterialOffersTran
     private ?string $name = null;
 
 
-
     public function withOffer(CategoryMaterialOffers|CategoryMaterialOffersUid $offer): self
     {
         $this->offer = $offer instanceof CategoryMaterialOffers ? $offer->getId() : $offer;

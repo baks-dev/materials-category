@@ -85,7 +85,7 @@ final class PropertyFieldsCategoryMaterialChoiceRepository implements PropertyFi
                 ->setParameter(
                     key: 'category',
                     value: $this->category,
-                    type: CategoryMaterialUid::TYPE
+                    type: CategoryMaterialUid::TYPE,
                 );
         }
 
@@ -122,7 +122,7 @@ final class PropertyFieldsCategoryMaterialChoiceRepository implements PropertyFi
                 ->setParameter(
                     key: 'category',
                     value: $this->category,
-                    type: CategoryMaterialUid::TYPE
+                    type: CategoryMaterialUid::TYPE,
                 );
         }
 

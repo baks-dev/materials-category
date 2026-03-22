@@ -28,10 +28,10 @@ let formName = document.forms.category_material_form;
 
 /* кнопка Добавить коллекцию */
 //var $addButton = document.querySelector('button.add_collection');
-let $addButtonSection = document.getElementById('section_addCollection');
+let $addButtonSection = document.getElementById("section_addCollection");
 
 /* Блок для новой коллекции */
-let $blockCollection = document.getElementById('section_collection');
+let $blockCollection = document.getElementById("section_collection");
 
 if($blockCollection)
 {
@@ -57,11 +57,11 @@ if($blockCollection)
     deleteSection($blockCollection);
 
     /* добавить событие на удаление свойства из секции */
-    deleteField($blockCollection)
+    deleteField($blockCollection);
 
 
     /* Существующие кнопки Добавить поле в секцию */
-    let $addButtonField = document.querySelectorAll('[id^="createSectionField"]');
+    let $addButtonField = document.querySelectorAll("[id^=\"createSectionField\"]");
     $addButtonField.forEach(function(item)
     {
         createSectionField(item.dataset.section);
@@ -100,7 +100,7 @@ if($blockCollection)
      */
 
     /* Добавляем новую коллекцию */
-    $addButtonSection.addEventListener('click', function()
+    $addButtonSection.addEventListener("click", function()
     {
         /* получаем прототип коллекции  */
         let newForm = this.dataset.prototype;
@@ -115,14 +115,14 @@ if($blockCollection)
 
 
         /* Вставляем новую коллекцию */
-        let div = document.createElement('div');
-        div.id = 'item-collection-section-' + index;
+        let div = document.createElement("div");
+        div.id = "item-collection-section-" + index;
 
-        div.classList.add('card');
-        div.classList.add('p-4');
-        div.classList.add('mb-3');
-        div.classList.add('border-light');
-        div.classList.add('item-collection-section');
+        div.classList.add("card");
+        div.classList.add("p-4");
+        div.classList.add("mb-3");
+        div.classList.add("border-light");
+        div.classList.add("item-collection-section");
 
 
         div.innerHTML = newForm;
@@ -130,7 +130,7 @@ if($blockCollection)
 
 
         /* Плавная прокрутка к элементу */
-        div.scrollIntoView({block: "center", inline: "center", behavior: "smooth"});
+        div.scrollIntoView({block : "center", inline : "center", behavior : "smooth"});
 
         // let field = document.getElementById('field-collection-' + index);
         // field.innerHTML = field.innerHTML.replace(/__FIELDS__/g, '0')
@@ -157,22 +157,23 @@ if($blockCollection)
 function deleteSection($block)
 {
 
-    let $delItem = $block.querySelectorAll('.del-item-section');
+    let $delItem = $block.querySelectorAll(".del-item-section");
 
     /* Удаляем при клике колекцию СЕКЦИЙ */
     $delItem.forEach(function(item)
     {
-        item.addEventListener('click', function()
+        item.addEventListener("click", function()
         {
 
-            let $counter = $block.getElementsByClassName('item-collection-section').length;
+            let $counter = $block.getElementsByClassName("item-collection-section").length;
 
             if($counter > 1)
             {
-                item.closest('.item-collection-section').remove();
-            } else
+                item.closest(".item-collection-section").remove();
+            }
+            else
             {
-                alert('Минимально должна быть добавлена одна секция');
+                alert("Минимально должна быть добавлена одна секция");
             }
         });
     });
@@ -182,23 +183,24 @@ function deleteSection($block)
 function deleteField($block)
 {
 
-    $delItem = $block.querySelectorAll('.del-item-field');
+    $delItem = $block.querySelectorAll(".del-item-field");
 
     /* Удаляем при клике свойство из секции */
     $delItem.forEach(function(item)
     {
-        item.addEventListener('click', function()
+        item.addEventListener("click", function()
         {
 
-            let $fieldCollection = document.getElementById('field-collection-' + this.dataset.section);
-            let $counter = $fieldCollection.querySelectorAll('.item-collection-field').length;
+            let $fieldCollection = document.getElementById("field-collection-" + this.dataset.section);
+            let $counter = $fieldCollection.querySelectorAll(".item-collection-field").length;
 
             if($counter > 1)
             {
-                item.closest('.item-collection-field').remove();
-            } else
+                item.closest(".item-collection-field").remove();
+            }
+            else
             {
-                alert('Минимально должна быть добавлена одна секция');
+                alert("Минимально должна быть добавлена одна секция");
             }
         });
     });
@@ -210,10 +212,10 @@ function createSectionField(section)
 {
 
     /* Событие на клик добавления полей в секцию */
-    let $btnAddFields = document.getElementById('createSectionField' + section);
+    let $btnAddFields = document.getElementById("createSectionField" + section);
 
     //$btnCreateSectionField = div.querySelector('#createSectionField'+ index);
-    $btnAddFields.addEventListener('click', function()
+    $btnAddFields.addEventListener("click", function()
     {
 
         //$btnAddFields = document.getElementById('createSectionField'+section)
@@ -234,18 +236,18 @@ function createSectionField(section)
 
 
         /* Вставляем новую коллекцию */
-        let div = document.createElement('div');
-        div.id = 'item-collection-field-' + index;
-        div.classList.add('item-collection-field');
-        div.classList.add('pb-3');
+        let div = document.createElement("div");
+        div.id = "item-collection-field-" + index;
+        div.classList.add("item-collection-field");
+        div.classList.add("pb-3");
 
         div.innerHTML = newForm;
 
-        document.getElementById('field-collection-' + section_id).append(div);
+        document.getElementById("field-collection-" + section_id).append(div);
 
 
         /* Плавная прокрутка к элементу */
-        div.scrollIntoView({block: "center", inline: "center", behavior: "smooth"});
+        div.scrollIntoView({block : "center", inline : "center", behavior : "smooth"});
 
         /* Удаляем при клике СВОЙСТВО */
         deleteField(div);
@@ -286,13 +288,13 @@ function createSectionField(section)
 // }
 
 
-document.querySelectorAll('.is-reference').forEach(function(isReference)
+document.querySelectorAll(".is-reference").forEach(function(isReference)
 {
 
     /* Обрабатываем уже существующие и сохраненные ТП */
     chanfeReferenc(isReference);
 
-    isReference.addEventListener('change', function()
+    isReference.addEventListener("change", function()
     {
         chanfeReferenc(this);
     });
@@ -310,16 +312,16 @@ executeFunc(function charUrlCode()
         return false;
     }
 
-    if(typeof catUrl.debounce !== 'function')
+    if(typeof catUrl.debounce !== "function")
     {
         return false;
     }
 
 
-    $name.addEventListener('input', catUrl.debounce(500));
+    $name.addEventListener("input", catUrl.debounce(500));
 
     return true;
-})
+});
 
 
 //if($name)
@@ -356,7 +358,7 @@ executeFunc(function charUrlCode()
 
 function catUrl()
 {
-    let inputUrl = document.getElementById(formName.name + '_info_url');
+    let inputUrl = document.getElementById(formName.name + "_info_url");
 
     if(inputUrl === null)
     {
@@ -377,7 +379,7 @@ function setupCheckboxGroup(namePart)
     {
         checkboxes.forEach(function(item)
         {
-            item.addEventListener('change', function()
+            item.addEventListener("change", function()
             {
                 const currentCheck = this.id; // ID текущего чекбокса
                 checkboxes.forEach(function(event)
@@ -392,17 +394,17 @@ function setupCheckboxGroup(namePart)
     }
 }
 
-setupCheckboxGroup('price');
-setupCheckboxGroup('article');
-setupCheckboxGroup('quantitative');
-setupCheckboxGroup('image');
+setupCheckboxGroup("price");
+setupCheckboxGroup("article");
+setupCheckboxGroup("quantitative");
+setupCheckboxGroup("image");
 
 
 /** Обрабатываем чекбоксы торговых предложений и вариантов */
 
-$checkboxOfferSettings = document.getElementById(formName.name + '_offer_offer');
-$checkboxVariationSettings = document.getElementById(formName.name + '_offer_variation_variation');
-$checkboxModificationSettings = document.getElementById(formName.name + '_offer_variation_modification_modification');
+$checkboxOfferSettings = document.getElementById(formName.name + "_offer_offer");
+$checkboxVariationSettings = document.getElementById(formName.name + "_offer_variation_variation");
+$checkboxModificationSettings = document.getElementById(formName.name + "_offer_variation_modification_modification");
 
 
 $nameOfferSettings = document.querySelectorAll("input[id^='" + formName.name + "_offer_translate']");
@@ -418,7 +420,7 @@ toggleSettings($checkboxModificationSettings);
 // Функция для управления видимостью и обязательностью полей
 function toggleSettings(checkbox, children = null)
 {
-    let settingsContainer = document.getElementById(checkbox.id + '_settings');
+    let settingsContainer = document.getElementById(checkbox.id + "_settings");
 
     let inputElements;
 
@@ -441,12 +443,12 @@ function toggleSettings(checkbox, children = null)
     {
 
         // показываем блок натсроек
-        settingsContainer.classList.remove('d-none');
+        settingsContainer.classList.remove("d-none");
 
         /** Сбрасываем обязательные для заполнения элементы */
         Array.from(inputElements).forEach(input =>
         {
-            input.setAttribute('required', true);
+            input.setAttribute("required", true);
         });
 
         /** Отключаем конпку выбора дочернего элемента */
@@ -455,14 +457,15 @@ function toggleSettings(checkbox, children = null)
             children.disabled = false;
         }
 
-    } else
+    }
+    else
     {
 
         // скрываем блок натсроек
-        settingsContainer.classList.add('d-none');
+        settingsContainer.classList.add("d-none");
 
         /** Если кнопка Торговое предложение -  отключаем кнопку Множественный вариант */
-        if(checkbox.id === formName.name + '_offer_offer')
+        if(checkbox.id === formName.name + "_offer_offer")
         {
             $checkboxVariationSettings.checked = false;
             $checkboxVariationSettings.chedisabledcked = true;
@@ -478,25 +481,25 @@ function toggleSettings(checkbox, children = null)
         }
 
         /** Делаем элементы обязательными для заполнения */
-        Array.from(inputElements).forEach(input => input.removeAttribute('required'));
+        Array.from(inputElements).forEach(input => input.removeAttribute("required"));
 
     }
 }
 
 // Обработчик для чекбокса "Offer"
-$checkboxOfferSettings.addEventListener('change', function()
+$checkboxOfferSettings.addEventListener("change", function()
 {
     toggleSettings(this, $checkboxVariationSettings);
 });
 
 // Обработчик для чекбокса "Variation"
-$checkboxVariationSettings.addEventListener('change', function()
+$checkboxVariationSettings.addEventListener("change", function()
 {
     toggleSettings(this, $checkboxModificationSettings);
 });
 
 // Обработчик для чекбокса "Modification"
-$checkboxModificationSettings.addEventListener('change', function()
+$checkboxModificationSettings.addEventListener("change", function()
 {
     toggleSettings(this);
 });
@@ -508,10 +511,11 @@ function chanfeReferenc($this)
     let ref = document.getElementById($this.dataset.reference);
     if($this.checked === true)
     {
-        ref.classList.remove('d-none');
-    } else
+        ref.classList.remove("d-none");
+    }
+    else
     {
-        ref.classList.add('d-none');
+        ref.classList.add("d-none");
         ref.selectedIndex = 0; /* сбрасываем select */
     }
 }
@@ -519,9 +523,9 @@ function chanfeReferenc($this)
 
 /** Добавить контактный телефон */
 
-document.querySelectorAll('#category_material_form-add').forEach(function(item)
+document.querySelectorAll("#category_material_form-add").forEach(function(item)
 {
-    item.addEventListener('click', addDomain);
+    item.addEventListener("click", addDomain);
 });
 
 function addDomain()
@@ -532,26 +536,26 @@ function addDomain()
     let index = this.dataset.index * 1;
     let collection = this.dataset.collection;
 
-    newForm = newForm.replace(/__category_domain__/g, index)
+    newForm = newForm.replace(/__category_domain__/g, index);
 
-    let div = document.createElement('div');
+    let div = document.createElement("div");
     div.innerHTML = newForm;
-    div.id = 'item_category_material_form_domain_' + index;
-    div.classList.add('mb-3');
+    div.id = "item_category_material_form_domain_" + index;
+    div.classList.add("mb-3");
 
     let $collection = document.getElementById(collection);
     $collection.append(div);
 
     /* Удаляем контактный номер телефона */
-    (div.querySelector('.del-item-domain'))?.addEventListener('click', deletePhone);
+    (div.querySelector(".del-item-domain"))?.addEventListener("click", deletePhone);
 
     this.dataset.index = (index + 1).toString();
 
 }
 
-document.querySelectorAll('.del-item-domain').forEach(function(item)
+document.querySelectorAll(".del-item-domain").forEach(function(item)
 {
-    item.addEventListener('click', deletePhone);
+    item.addEventListener("click", deletePhone);
 });
 
 function deletePhone()

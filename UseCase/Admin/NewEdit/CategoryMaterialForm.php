@@ -68,7 +68,7 @@ final class CategoryMaterialForm extends AbstractType
                 'choice_label' => function(ParentCategoryMaterialUid $type) {
                     return (is_int($type->getLevel()) ? str_repeat(' - ', $type->getLevel() - 1) : '').$type->getOption();
                 },
-            ]
+            ],
         );
 
 
@@ -105,7 +105,7 @@ final class CategoryMaterialForm extends AbstractType
         $builder->add(
             'Save',
             SubmitType::class,
-            ['label' => 'Save', 'label_html' => true, 'attr' => ['class' => 'btn-primary']]
+            ['label' => 'Save', 'label_html' => true, 'attr' => ['class' => 'btn-primary']],
         );
 
     }
@@ -117,7 +117,7 @@ final class CategoryMaterialForm extends AbstractType
                 'data_class' => CategoryMaterialDTO::class,
                 'method' => 'POST',
                 'attr' => ['class' => 'w-100'],
-            ]
+            ],
         );
     }
 

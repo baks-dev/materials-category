@@ -89,7 +89,7 @@ final class CategoryMaterialChoiceRepository implements CategoryMaterialChoiceIn
                 'category',
                 CategoryMaterialEvent::class,
                 'category_event',
-                'category_event.id = category.event'
+                'category_event.id = category.event',
             );
 
         $dbal
@@ -98,7 +98,7 @@ final class CategoryMaterialChoiceRepository implements CategoryMaterialChoiceIn
                 'category',
                 CategoryMaterialTrans::class,
                 'category_trans',
-                'category_trans.event = category.event AND category_trans.local = :local'
+                'category_trans.event = category.event AND category_trans.local = :local',
             );
 
 

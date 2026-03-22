@@ -68,7 +68,7 @@ final class CategoryMaterialVariationFormRepository implements CategoryMaterialV
             variation.article,
             variation_trans.name
         )',
-            CategoryMaterialVariationFormDTO::class
+            CategoryMaterialVariationFormDTO::class,
         );
 
         $orm->select($select);
@@ -83,7 +83,7 @@ final class CategoryMaterialVariationFormRepository implements CategoryMaterialV
                 ->setParameter(
                     key: 'offer',
                     value: $this->offer,
-                    type: CategoryMaterialOffersUid::TYPE
+                    type: CategoryMaterialOffersUid::TYPE,
                 );
         }
 
@@ -91,14 +91,14 @@ final class CategoryMaterialVariationFormRepository implements CategoryMaterialV
             CategoryMaterialOffers::class,
             'offer',
             'WITH',
-            'offer.id = variation.offer'
+            'offer.id = variation.offer',
         );
 
         $orm->join(
             CategoryMaterial::class,
             'category',
             'WITH',
-            'category.event = offer.event'
+            'category.event = offer.event',
         );
 
 
@@ -106,7 +106,7 @@ final class CategoryMaterialVariationFormRepository implements CategoryMaterialV
             CategoryMaterialVariationTrans::class,
             'variation_trans',
             'WITH',
-            'variation_trans.variation = variation.id AND variation_trans.local = :local'
+            'variation_trans.variation = variation.id AND variation_trans.local = :local',
         );
 
 

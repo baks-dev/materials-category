@@ -232,6 +232,11 @@ final class CategoryMaterialOffersDTO implements CategoryMaterialOffersInterface
         return $this->offer;
     }
 
+    public function setOffer(bool $offer): void
+    {
+        $this->offer = $offer;
+    }
+
     public function resetVariation(): void
     {
         $this->variation->resetModification();
@@ -240,12 +245,6 @@ final class CategoryMaterialOffersDTO implements CategoryMaterialOffersInterface
         {
             $this->variation = null;
         }
-    }
-
-
-    public function setOffer(bool $offer): void
-    {
-        $this->offer = $offer;
     }
 
 }

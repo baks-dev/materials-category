@@ -63,7 +63,7 @@ final readonly class DeleteCategoryMaterialHandler
             $uniqid = uniqid('', false);
             $errorsString = sprintf(
                 'Not found event id in class: %s',
-                $command::class
+                $command::class,
             );
             $this->logger->error($uniqid.': '.$errorsString);
 
@@ -72,7 +72,7 @@ final readonly class DeleteCategoryMaterialHandler
 
         /* Получаем событие */
         $Event = $this->entityManager->getRepository(CategoryMaterialEvent::class)->find(
-            $command->getEvent()
+            $command->getEvent(),
         );
 
         if($Event === null)
@@ -81,7 +81,7 @@ final readonly class DeleteCategoryMaterialHandler
             $errorsString = sprintf(
                 'Not found %s by id: %s',
                 CategoryMaterialEvent::class,
-                $command->getEvent()
+                $command->getEvent(),
             );
             $this->logger->error($uniqid.': '.$errorsString);
 
@@ -98,7 +98,7 @@ final readonly class DeleteCategoryMaterialHandler
             $errorsString = sprintf(
                 'Not found %s by event: %s',
                 CategoryMaterial::class,
-                $command->getEvent()
+                $command->getEvent(),
             );
             $this->logger->error($uniqid.': '.$errorsString);
 
@@ -118,7 +118,7 @@ final readonly class DeleteCategoryMaterialHandler
         /* Отправляем событие в шину  */
         $this->messageDispatch->dispatch(
             message: new CategoryMaterialMessage($Main->getId(), $Main->getEvent(), $command->getEvent()),
-            transport: 'materials-category'
+            transport: 'materials-category',
         );
 
         return $Main;

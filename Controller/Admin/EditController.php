@@ -58,8 +58,7 @@ final class EditController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid() && $form->has('Save'))
         {
-            /** TODO */
-            //$this->refreshTokenForm($form);
+            $this->refreshTokenForm($form);
 
             $CategoryMaterial = $handler->handle($CategoryMaterialDTO);
 

@@ -69,7 +69,7 @@ final class CategoryMaterialVariationByOfferRepository implements CategoryMateri
                 ->setParameter(
                     key: 'offer',
                     value: $this->offer,
-                    type: CategoryMaterialOffersUid::TYPE
+                    type: CategoryMaterialOffersUid::TYPE,
                 );
         }
         $qb
@@ -78,7 +78,7 @@ final class CategoryMaterialVariationByOfferRepository implements CategoryMateri
                 CategoryMaterialVariation::class,
                 'variation',
                 'WITH',
-                'variation.offer = offer.id'
+                'variation.offer = offer.id',
             );
 
 

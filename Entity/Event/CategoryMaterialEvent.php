@@ -103,12 +103,6 @@ class CategoryMaterialEvent extends EntityState
         return $this->category;
     }
 
-
-    public function getId(): CategoryMaterialEventUid
-    {
-        return $this->id;
-    }
-
     public function getNameByLocale(Locale $locale): ?string
     {
         $name = null;
@@ -125,18 +119,20 @@ class CategoryMaterialEvent extends EntityState
         return $name;
     }
 
-
     public function getCategory(): ?CategoryMaterialUid
     {
         return $this->category;
     }
-
 
     public function setMain(CategoryMaterial|CategoryMaterialUid $category): void
     {
         $this->category = $category instanceof CategoryMaterial ? $category->getId() : $category;
     }
 
+    public function getId(): CategoryMaterialEventUid
+    {
+        return $this->id;
+    }
 
     public function getDto($dto): mixed
     {

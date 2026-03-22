@@ -69,7 +69,7 @@ final class DeleteController extends AbstractController
                 'admin.form.header.delete',
                 'admin.danger.delete',
                 'admin.materials.category',
-                $CategoryMaterial
+                $CategoryMaterial,
             );
 
             return $this->redirectToRoute('materials-category:admin.index', status: 400);
@@ -79,7 +79,7 @@ final class DeleteController extends AbstractController
             [
                 'form' => $form->createView(),
                 'name' => $Event->getNameByLocale($this->getLocale()), // название согласно локали
-            ]
+            ],
         );
     }
 }

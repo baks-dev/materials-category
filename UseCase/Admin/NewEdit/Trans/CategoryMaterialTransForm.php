@@ -46,8 +46,8 @@ final class CategoryMaterialTransForm extends AbstractType
                 function($price) {
 
                     return new Locale($price);
-                }
-            )
+                },
+            ),
         );
 
         /** Название раздела */
@@ -62,7 +62,7 @@ final class CategoryMaterialTransForm extends AbstractType
         $resolver->setDefaults(
             [
                 'data_class' => CategoryMaterialTransDTO::class,
-            ]
+            ],
         );
     }
 

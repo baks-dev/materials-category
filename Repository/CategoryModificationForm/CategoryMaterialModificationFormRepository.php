@@ -73,7 +73,7 @@ final class CategoryMaterialModificationFormRepository implements CategoryMateri
             modification_trans.name
             
         )',
-            CategoryMaterialModificationFormDTO::class
+            CategoryMaterialModificationFormDTO::class,
         );
 
         $qb->select($select);
@@ -87,7 +87,7 @@ final class CategoryMaterialModificationFormRepository implements CategoryMateri
                 ->setParameter(
                     key: 'variation',
                     value: $this->variation,
-                    type: CategoryMaterialVariationUid::TYPE
+                    type: CategoryMaterialVariationUid::TYPE,
                 );
         }
 
@@ -96,7 +96,7 @@ final class CategoryMaterialModificationFormRepository implements CategoryMateri
                 CategoryMaterialVariation::class,
                 'variation',
                 'WITH',
-                'variation.id = modification.variation'
+                'variation.id = modification.variation',
             );
 
         $qb
@@ -104,7 +104,7 @@ final class CategoryMaterialModificationFormRepository implements CategoryMateri
                 CategoryMaterialOffers::class,
                 'offer',
                 'WITH',
-                'offer.id = variation.offer'
+                'offer.id = variation.offer',
             );
 
         $qb
@@ -112,7 +112,7 @@ final class CategoryMaterialModificationFormRepository implements CategoryMateri
                 CategoryMaterial::class,
                 'category',
                 'WITH',
-                'category.event = offer.event'
+                'category.event = offer.event',
             );
 
         $qb
@@ -121,7 +121,7 @@ final class CategoryMaterialModificationFormRepository implements CategoryMateri
                 'modification_trans',
                 'WITH',
                 'modification_trans.modification = modification.id AND 
-                modification_trans.local = :local'
+                modification_trans.local = :local',
             );
 
 

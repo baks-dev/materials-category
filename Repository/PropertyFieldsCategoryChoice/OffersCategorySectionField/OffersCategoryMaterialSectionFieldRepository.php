@@ -70,7 +70,7 @@ final class OffersCategoryMaterialSectionFieldRepository implements OffersCatego
                 ->setParameter(
                     'category',
                     $this->category,
-                    CategoryMaterialUid::TYPE
+                    CategoryMaterialUid::TYPE,
                 );
         }
 

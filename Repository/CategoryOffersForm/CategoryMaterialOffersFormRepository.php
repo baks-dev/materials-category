@@ -68,7 +68,7 @@ final class CategoryMaterialOffersFormRepository implements CategoryMaterialOffe
             offers.article,
             offers_trans.name
         )',
-            CategoryMaterialOffersFormDTO::class
+            CategoryMaterialOffersFormDTO::class,
         );
 
         $orm->select($select);
@@ -82,13 +82,13 @@ final class CategoryMaterialOffersFormRepository implements CategoryMaterialOffe
                     CategoryMaterial::class,
                     'category',
                     'WITH',
-                    'category.event = offers.event'
+                    'category.event = offers.event',
                 )
                 ->where('category.id = :category')
                 ->setParameter(
                     key: 'category',
                     value: $this->category,
-                    type: CategoryMaterialUid::TYPE
+                    type: CategoryMaterialUid::TYPE,
                 );
         }
 
@@ -98,7 +98,7 @@ final class CategoryMaterialOffersFormRepository implements CategoryMaterialOffe
                 CategoryMaterialOffersTrans::class,
                 'offers_trans',
                 'WITH',
-                'offers_trans.offer = offers.id AND offers_trans.local = :local'
+                'offers_trans.offer = offers.id AND offers_trans.local = :local',
             );
 
 

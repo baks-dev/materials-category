@@ -41,7 +41,7 @@ final class CategoryMaterialCoverForm extends AbstractType
                     'label' => false,
                     'required' => false,
                     'attr' => ['accept' => ".png, .jpg, .jpeg, .webp, .gif"],
-                ]
+                ],
             );
     }
 
@@ -50,7 +50,7 @@ final class CategoryMaterialCoverForm extends AbstractType
         $resolver->setDefaults(
             [
                 'data_class' => CategoryMaterialCoverDTO::class,
-            ]
+            ],
         );
     }
 

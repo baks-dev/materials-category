@@ -69,7 +69,7 @@ final class CategoryMaterialOfferRepository implements CategoryMaterialOfferInte
                 ->setParameter(
                     key: 'category',
                     value: $this->category,
-                    type: CategoryMaterialUid::TYPE
+                    type: CategoryMaterialUid::TYPE,
                 );
         }
 
@@ -77,7 +77,7 @@ final class CategoryMaterialOfferRepository implements CategoryMaterialOfferInte
             CategoryMaterialOffers::class,
             'offer',
             'WITH',
-            'offer.event = category.event'
+            'offer.event = category.event',
         );
 
         return $orm->getOneOrNullResult();

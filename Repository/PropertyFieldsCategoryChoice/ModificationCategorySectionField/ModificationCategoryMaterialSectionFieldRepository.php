@@ -68,7 +68,7 @@ final class ModificationCategoryMaterialSectionFieldRepository implements Modifi
                 ->setParameter(
                     'variation',
                     $this->variation,
-                    CategoryMaterialVariationUid::TYPE
+                    CategoryMaterialVariationUid::TYPE,
                 );
         }
 

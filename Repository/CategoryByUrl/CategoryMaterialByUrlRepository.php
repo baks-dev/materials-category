@@ -63,7 +63,7 @@ final readonly class CategoryMaterialByUrlRepository implements CategoryMaterial
                 'info',
                 CategoryMaterial::class,
                 'material_category',
-                'material_category.event = info.event'
+                'material_category.event = info.event',
             );
 
 
@@ -73,7 +73,7 @@ final readonly class CategoryMaterialByUrlRepository implements CategoryMaterial
                 'material_category',
                 CategoryMaterialEvent::class,
                 'material_category_event',
-                'material_category_event.id = material_category.event'
+                'material_category_event.id = material_category.event',
             );
 
         $dbal
@@ -82,7 +82,7 @@ final readonly class CategoryMaterialByUrlRepository implements CategoryMaterial
                 'material_category',
                 CategoryMaterialTrans::class,
                 'material_category_trans',
-                'material_category_trans.event = material_category_event.id  AND material_category_trans.local = :local'
+                'material_category_trans.event = material_category_event.id  AND material_category_trans.local = :local',
             );
 
 
@@ -93,7 +93,7 @@ final readonly class CategoryMaterialByUrlRepository implements CategoryMaterial
                 'material_category',
                 CategoryMaterialLanding::class,
                 'material_category_landing',
-                'material_category_landing.event = material_category_event.id  AND material_category_landing.local = :local'
+                'material_category_landing.event = material_category_event.id  AND material_category_landing.local = :local',
             );
 
 
@@ -103,7 +103,7 @@ final readonly class CategoryMaterialByUrlRepository implements CategoryMaterial
                 'material_category_event',
                 CategoryMaterial::class,
                 'parent_material_category',
-                'parent_material_category.id = material_category_event.parent'
+                'parent_material_category.id = material_category_event.parent',
             );
 
         $dbal
@@ -112,7 +112,7 @@ final readonly class CategoryMaterialByUrlRepository implements CategoryMaterial
                 'parent_material_category',
                 CategoryMaterialTrans::class,
                 'parent_material_category_trans',
-                'parent_material_category_trans.event = parent_material_category.event AND parent_material_category_trans.local = :local'
+                'parent_material_category_trans.event = parent_material_category.event AND parent_material_category_trans.local = :local',
             );
 
         $dbal
@@ -122,7 +122,7 @@ final readonly class CategoryMaterialByUrlRepository implements CategoryMaterial
                 'parent_material_category',
                 CategoryMaterialInfo::class,
                 'parent_material_category_info',
-                'parent_material_category_info.event = parent_material_category.event '
+                'parent_material_category_info.event = parent_material_category.event ',
             );
 
 
@@ -131,21 +131,21 @@ final readonly class CategoryMaterialByUrlRepository implements CategoryMaterial
             'material_category',
             CategoryMaterialEvent::class,
             'parent_category_event',
-            'parent_category_event.parent = material_category.id'
+            'parent_category_event.parent = material_category.id',
         );
 
         $dbal->leftJoin(
             'parent_category_event',
             CategoryMaterialInfo::class,
             'parent_category_info',
-            'parent_category_info.event = parent_category_event.id'
+            'parent_category_info.event = parent_category_event.id',
         );
 
         $dbal->leftJoin(
             'parent_category_event',
             CategoryMaterialCover::class,
             'parent_category_cover',
-            'parent_category_cover.event = parent_category_event.id'
+            'parent_category_cover.event = parent_category_event.id',
         );
 
 
@@ -154,7 +154,7 @@ final readonly class CategoryMaterialByUrlRepository implements CategoryMaterial
             'parent_category_event',
             CategoryMaterialTrans::class,
             'parent_category_trans',
-            'parent_category_trans.event = parent_category_event.id  AND parent_category_trans.local = :local'
+            'parent_category_trans.event = parent_category_event.id  AND parent_category_trans.local = :local',
         );
 
 
@@ -183,7 +183,7 @@ final readonly class CategoryMaterialByUrlRepository implements CategoryMaterial
 					'parent_category_name', parent_category_trans.name
 				)
 		)
-			AS parent_category"
+			AS parent_category",
         );
 
         /** Обложка категории */

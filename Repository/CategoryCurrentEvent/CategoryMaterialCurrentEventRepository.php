@@ -98,7 +98,7 @@ final class CategoryMaterialCurrentEventRepository implements CategoryMaterialCu
                 ->setParameter(
                     key: 'main',
                     value: $this->main,
-                    type: CategoryMaterialUid::TYPE
+                    type: CategoryMaterialUid::TYPE,
                 );
         }
 
@@ -110,14 +110,14 @@ final class CategoryMaterialCurrentEventRepository implements CategoryMaterialCu
                 ->setParameter(
                     key: 'event',
                     value: $this->event,
-                    type: CategoryMaterialEventUid::TYPE
+                    type: CategoryMaterialEventUid::TYPE,
                 );
 
             $qb->join(
                 CategoryMaterial::class,
                 'main',
                 'WITH',
-                'main.id = event.category'
+                'main.id = event.category',
             );
         }
 
@@ -127,7 +127,7 @@ final class CategoryMaterialCurrentEventRepository implements CategoryMaterialCu
                 CategoryMaterialEvent::class,
                 'current',
                 'WITH',
-                'current.id = main.event'
+                'current.id = main.event',
             );
 
         return $qb->getOneOrNullResult() ?: false;

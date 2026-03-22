@@ -46,8 +46,8 @@ final class CategoryMaterialOffersTransForm extends AbstractType
                 function($price) {
 
                     return new Locale($price);
-                }
-            )
+                },
+            ),
         );
 
         /** Название торгового предложения */

@@ -63,7 +63,7 @@ final class CategoryMaterialVariationFieldsChoiceRepository implements CategoryM
 
         $select = sprintf(
             'new %s(variation.id, trans.name, variation.reference)',
-            CategoryMaterialVariationUid::class
+            CategoryMaterialVariationUid::class,
         );
 
         $qb->select($select);
@@ -77,7 +77,7 @@ final class CategoryMaterialVariationFieldsChoiceRepository implements CategoryM
                 ->setParameter(
                     key: 'offer',
                     value: $this->offer,
-                    type: CategoryMaterialOffersUid::TYPE
+                    type: CategoryMaterialOffersUid::TYPE,
                 );
         }
 
@@ -86,14 +86,14 @@ final class CategoryMaterialVariationFieldsChoiceRepository implements CategoryM
             CategoryMaterialVariation::class,
             'variation',
             'WITH',
-            'variation.offer = offer.id'
+            'variation.offer = offer.id',
         );
 
         $qb->leftJoin(
             CategoryMaterialVariationTrans::class,
             'trans',
             'WITH',
-            'trans.variation = variation.id AND trans.local = :local'
+            'trans.variation = variation.id AND trans.local = :local',
         );
 
         /* Кешируем результат ORM */

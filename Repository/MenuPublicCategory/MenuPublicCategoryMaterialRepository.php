@@ -75,7 +75,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
                 'category',
                 CategoryMaterialEvent::class,
                 'category_event',
-                'category_event.id = category.event AND category_event.parent IS NULL'
+                'category_event.id = category.event AND category_event.parent IS NULL',
             );
 
         $dbal
@@ -84,7 +84,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
                 'category_event',
                 CategoryMaterialInfo::class,
                 'category_info',
-                'category_info.event = category.event AND category_info.active = true'
+                'category_info.event = category.event AND category_info.active = true',
             );
 
         /* Обложка */
@@ -98,7 +98,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 					CONCAT ( '/upload/".$dbal->table(CategoryMaterialCover::class)."' , '/', category_cover.name)
 			   		ELSE NULL
 			END AS category_cover_dir
-		"
+		",
             );
 
         $dbal
@@ -106,7 +106,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
                 'category_event',
                 CategoryMaterialCover::class,
                 'category_cover',
-                'category_cover.event = category_event.id'
+                'category_cover.event = category_event.id',
             );
 
         /* Перевод категории */
@@ -117,7 +117,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
                 'category_event',
                 CategoryMaterialTrans::class,
                 'category_trans',
-                'category_trans.event = category_event.id AND category_trans.local = :local'
+                'category_trans.event = category_event.id AND category_trans.local = :local',
             );
 
 
@@ -127,7 +127,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'category',
             MaterialCategory::class,
             'material_category',
-            'material_category.category = category.id AND material_category.root = true'
+            'material_category.category = category.id AND material_category.root = true',
         );
 
 
@@ -135,14 +135,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'material_category',
             Material::class,
             'material',
-            'material.event = material_category.event'
+            'material.event = material_category.event',
         );
 
         $dbal->leftJoin(
             'material_category',
             MaterialPrice::class,
             'material_price',
-            'material_price.event = material.event'
+            'material_price.event = material.event',
         );
 
         $dbal
@@ -150,7 +150,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
                 'material',
                 MaterialInfo::class,
                 'material_info',
-                'material_info.material = material.id'
+                'material_info.material = material.id',
             );
 
         $dbal
@@ -158,7 +158,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
                 'material',
                 MaterialTrans::class,
                 'material_trans',
-                'material_trans.event = material.event AND material_trans.local = :local'
+                'material_trans.event = material.event AND material_trans.local = :local',
             );
 
 
@@ -166,14 +166,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'material',
             MaterialOffer::class,
             'material_offer',
-            'material_offer.event = material.event'
+            'material_offer.event = material.event',
         );
 
         $dbal->leftJoin(
             'material_offer',
             MaterialOfferQuantity::class,
             'material_offer_quantity',
-            'material_offer_quantity.offer = material_offer.id'
+            'material_offer_quantity.offer = material_offer.id',
         );
 
 
@@ -181,14 +181,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'material_offer',
             MaterialVariation::class,
             'material_variation',
-            'material_variation.offer = material_offer.id'
+            'material_variation.offer = material_offer.id',
         );
 
         $dbal->leftJoin(
             'material_variation',
             MaterialsVariationQuantity::class,
             'material_variation_quantity',
-            'material_variation_quantity.variation = material_variation.id'
+            'material_variation_quantity.variation = material_variation.id',
         );
 
 
@@ -196,7 +196,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'material_variation',
             MaterialModification::class,
             'material_modification',
-            'material_modification.variation = material_variation.id'
+            'material_modification.variation = material_variation.id',
         );
 
 
@@ -204,7 +204,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'material_modification',
             MaterialModificationQuantity::class,
             'material_modification_quantity',
-            'material_modification_quantity.modification = material_modification.id'
+            'material_modification_quantity.modification = material_modification.id',
         );
 
 
@@ -217,7 +217,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             '
                 material_modification_image.modification = material_modification.id AND
                 material_modification_image.root = true
-			'
+			',
         );
 
         $dbal->leftJoin(
@@ -227,7 +227,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             '
                 material_variation_image.variation = material_variation.id AND
                 material_variation_image.root = true
-			'
+			',
         );
 
         $dbal->leftJoin(
@@ -238,7 +238,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 			material_variation_image.name IS NULL AND
 			material_offer_images.offer = material_offer.id AND
 			material_offer_images.root = true
-			'
+			',
         );
 
         $dbal->leftJoin(
@@ -249,7 +249,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
                 material_offer_images.name IS NULL AND
                 material_photo.event = material.event AND
                 material_photo.root = true
-			'
+			',
         );
 
 
@@ -363,7 +363,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
                     (material_price.quantity - material_price.reserve)
                 ) > 0
             ) 
-			AS materials"
+			AS materials",
         );
 
 
@@ -384,21 +384,21 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'category',
             CategoryMaterialEvent::class,
             'parent_category_event',
-            'parent_category_event.parent = category.id'
+            'parent_category_event.parent = category.id',
         );
 
         $dbal->leftJoin(
             'parent_category_event',
             CategoryMaterialInfo::class,
             'parent_category_info',
-            'parent_category_info.event = parent_category_event.id'
+            'parent_category_info.event = parent_category_event.id',
         );
 
         $dbal->leftJoin(
             'parent_category_event',
             CategoryMaterialCover::class,
             'parent_category_cover',
-            'parent_category_cover.event = parent_category_event.id'
+            'parent_category_cover.event = parent_category_event.id',
         );
 
         // $dbal->addSelect('parent_category_trans.name AS parent_category_name');
@@ -406,7 +406,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'parent_category_event',
             CategoryMaterialTrans::class,
             'parent_category_trans',
-            'parent_category_trans.event = parent_category_event.id  AND parent_category_trans.local = :local'
+            'parent_category_trans.event = parent_category_event.id  AND parent_category_trans.local = :local',
         );
 
         // сырьё вложенной категории
@@ -415,7 +415,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'parent_category_event',
             MaterialCategory::class,
             'material_category_two',
-            'material_category_two.category = parent_category_event.category AND material_category_two.root = true'
+            'material_category_two.category = parent_category_event.category AND material_category_two.root = true',
         );
 
 
@@ -423,14 +423,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'material_category_two',
             Material::class,
             'material_two',
-            'material_two.event = material_category_two.event'
+            'material_two.event = material_category_two.event',
         );
 
         $dbal->leftJoin(
             'material_two',
             MaterialPrice::class,
             'material_two_price',
-            'material_two_price.event = material_two.event'
+            'material_two_price.event = material_two.event',
         );
 
 
@@ -439,7 +439,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
                 'material_two',
                 MaterialInfo::class,
                 'material_info_two',
-                'material_info_two.material = material_two.id'
+                'material_info_two.material = material_two.id',
             );
 
         $dbal
@@ -447,7 +447,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
                 'material_two',
                 MaterialTrans::class,
                 'material_trans_two',
-                'material_trans_two.event = material_two.event AND material_trans_two.local = :local'
+                'material_trans_two.event = material_two.event AND material_trans_two.local = :local',
             );
 
 
@@ -455,14 +455,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'material_two',
             MaterialOffer::class,
             'material_offer_two',
-            'material_offer_two.event = material_two.event'
+            'material_offer_two.event = material_two.event',
         );
 
         $dbal->leftJoin(
             'material_offer_two',
             MaterialOfferQuantity::class,
             'material_offer_two_quantity',
-            'material_offer_two_quantity.offer = material_offer_two.id'
+            'material_offer_two_quantity.offer = material_offer_two.id',
         );
 
 
@@ -470,14 +470,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'material_offer_two',
             MaterialVariation::class,
             'material_variation_two',
-            'material_variation_two.offer = material_offer_two.id'
+            'material_variation_two.offer = material_offer_two.id',
         );
 
         $dbal->leftJoin(
             'material_variation_two',
             MaterialsVariationQuantity::class,
             'material_variation_two_quantity',
-            'material_variation_two_quantity.variation = material_variation_two.id'
+            'material_variation_two_quantity.variation = material_variation_two.id',
         );
 
 
@@ -485,14 +485,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'material_variation_two',
             MaterialModification::class,
             'material_modification_two',
-            'material_modification_two.variation = material_variation_two.id'
+            'material_modification_two.variation = material_variation_two.id',
         );
 
         $dbal->leftJoin(
             'material_modification_two',
             MaterialModificationQuantity::class,
             'material_modification_two_quantity',
-            'material_modification_two_quantity.modification = material_modification_two.id'
+            'material_modification_two_quantity.modification = material_modification_two.id',
         );
 
 
@@ -505,7 +505,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             '
                 material_modification_image_two.modification = material_modification_two.id AND
                 material_modification_image_two.root = true
-			'
+			',
         );
 
         $dbal->leftJoin(
@@ -515,7 +515,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             '
                 material_variation_image_two.variation = material_variation_two.id AND
                 material_variation_image_two.root = true
-			'
+			',
         );
 
 
@@ -527,7 +527,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
                 material_variation_image_two.name IS NULL AND
                 material_offer_images_two.offer = material_offer_two.id AND
                 material_offer_images_two.root = true
-			'
+			',
         );
 
         $dbal->leftJoin(
@@ -538,7 +538,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
                 material_offer_images_two.name IS NULL AND
                 material_photo_two.event = material_two.event AND
                 material_photo_two.root = true
-			'
+			',
         );
 
 
@@ -568,7 +568,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
                         'child_category_description', parent_category_trans.description
                     )
             ) FILTER (WHERE parent_category_info.url IS NOT NULL AND parent_category_info.active = true) 
-			AS child_category"
+			AS child_category",
         );
 
 
@@ -656,7 +656,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
                     (material_two_price.quantity - material_two_price.reserve)
                 ) > 0
             ) 
-			AS child_materials"
+			AS child_materials",
         );
 
 
@@ -672,21 +672,21 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'parent_category_event',
             CategoryMaterialEvent::class,
             'parent_category_event_three',
-            'parent_category_event_three.parent = parent_category_event.category'
+            'parent_category_event_three.parent = parent_category_event.category',
         );
 
         $dbal->leftJoin(
             'parent_category_event_three',
             CategoryMaterialInfo::class,
             'parent_category_info_three',
-            'parent_category_info_three.event = parent_category_event_three.id'
+            'parent_category_info_three.event = parent_category_event_three.id',
         );
 
         $dbal->leftJoin(
             'parent_category_event_three',
             CategoryMaterialCover::class,
             'parent_category_cover_three',
-            'parent_category_cover_three.event = parent_category_event_three.id'
+            'parent_category_cover_three.event = parent_category_event_three.id',
         );
 
 
@@ -694,7 +694,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'parent_category_event_three',
             CategoryMaterialTrans::class,
             'parent_category_trans_three',
-            'parent_category_trans_three.event = parent_category_event_three.id  AND parent_category_trans_three.local = :local'
+            'parent_category_trans_three.event = parent_category_event_three.id  AND parent_category_trans_three.local = :local',
         );
 
 
@@ -702,7 +702,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'parent_category_event_three',
             MaterialCategory::class,
             'material_category_three',
-            'material_category_three.category = parent_category_event_three.category AND material_category_three.root = true'
+            'material_category_three.category = parent_category_event_three.category AND material_category_three.root = true',
         );
 
 
@@ -710,14 +710,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'material_category_three',
             Material::class,
             'material_three',
-            'material_three.event = material_category_three.event'
+            'material_three.event = material_category_three.event',
         );
 
         $dbal->leftJoin(
             'material_three',
             MaterialPrice::class,
             'material_three_price',
-            'material_three_price.event = material_three.event'
+            'material_three_price.event = material_three.event',
         );
 
 
@@ -725,14 +725,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'material_three',
             MaterialOffer::class,
             'material_offer_three',
-            'material_offer_three.event = material_three.event'
+            'material_offer_three.event = material_three.event',
         );
 
         $dbal->leftJoin(
             'material_offer_three',
             MaterialOfferQuantity::class,
             'material_offer_three_quantity',
-            'material_offer_three_quantity.offer = material_offer_three.id'
+            'material_offer_three_quantity.offer = material_offer_three.id',
         );
 
 
@@ -740,14 +740,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'material_offer_three',
             MaterialVariation::class,
             'material_variation_three',
-            'material_variation_three.offer = material_offer_three.id'
+            'material_variation_three.offer = material_offer_three.id',
         );
 
         $dbal->leftJoin(
             'material_variation_three',
             MaterialsVariationQuantity::class,
             'material_variation_three_quantity',
-            'material_variation_three_quantity.variation = material_variation_three.id'
+            'material_variation_three_quantity.variation = material_variation_three.id',
         );
 
 
@@ -755,14 +755,14 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
             'material_variation_three',
             MaterialModification::class,
             'material_modification_three',
-            'material_modification_three.variation = material_variation_three.id'
+            'material_modification_three.variation = material_variation_three.id',
         );
 
         $dbal->leftJoin(
             'material_modification_three',
             MaterialModificationQuantity::class,
             'material_modification_three_quantity',
-            'material_modification_three_quantity.modification = material_modification_three.id'
+            'material_modification_three_quantity.modification = material_modification_three.id',
         );
 
 
@@ -810,7 +810,7 @@ final readonly class MenuPublicCategoryMaterialRepository implements MenuPublicC
 		
 		) 
 	
-			AS child_category_three"
+			AS child_category_three",
         );
 
         $dbal->orderBy('category_event.sort', 'ASC');

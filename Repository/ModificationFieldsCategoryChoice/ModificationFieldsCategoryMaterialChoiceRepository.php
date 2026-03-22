@@ -63,7 +63,7 @@ final class ModificationFieldsCategoryMaterialChoiceRepository implements Modifi
 
         $select = sprintf(
             'new %s(modification.id, trans.name, modification.reference)',
-            CategoryMaterialModificationUid::class
+            CategoryMaterialModificationUid::class,
         );
         $orm->select($select);
 
@@ -76,7 +76,7 @@ final class ModificationFieldsCategoryMaterialChoiceRepository implements Modifi
                 ->setParameter(
                     key: 'variation',
                     value: $this->variation,
-                    type: CategoryMaterialVariationUid::TYPE
+                    type: CategoryMaterialVariationUid::TYPE,
                 );
         }
 
@@ -85,14 +85,14 @@ final class ModificationFieldsCategoryMaterialChoiceRepository implements Modifi
             CategoryMaterialModification::class,
             'modification',
             'WITH',
-            'modification.variation = variation.id'
+            'modification.variation = variation.id',
         );
 
         $orm->leftJoin(
             CategoryMaterialModificationTrans::class,
             'trans',
             'WITH',
-            'trans.modification = modification.id AND trans.local = :local'
+            'trans.modification = modification.id AND trans.local = :local',
         );
 
 
